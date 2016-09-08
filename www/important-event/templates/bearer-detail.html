@@ -1,0 +1,65 @@
+<div class="modal">
+  <ion-header-bar class="bar bar-header" style="background: rgba(250, 255, 217, 0.4)">
+      <button class="button button-clear ion-chevron-left" ng-click="closeModal(1)"></button>
+      <h1 class="title"><span>{{detailTitle}}</span></h1>
+      <div class="buttons">
+        <button class="button button-clear" ng-click="showDataSource()">统计口径</button>
+      </div>
+  </ion-header-bar>
+  <ion-content>
+    <p class="text-detail" id="detail-description">{{description}}</p>
+
+    <div ng-show='monthShow'>
+      <div id="month-chart" class="e_charts"></div>
+      <br/>
+      <hr style="width: 90%"/>
+      <br/>
+    </div>
+    <div ng-show='centerShow'>
+      <div id="center-chart" class="center_charts"></div>
+      <!--<div id="center-chart" class="e_charts"></div>-->
+      <br/>
+      <hr style="width: 90%"/>
+      <br/>
+    </div>
+    <div ng-show="provShow">
+      <div class="detail-month">
+        <div class="full-screen"><img src="../../img/fullscreen.png" ng-click="openModal(0,0)"/></div>
+        <div id="prov-chart" ng-show='provShow' class="e_charts"></div>
+      </div>
+      <hr style="width: 90%"/>
+      <br/>
+    </div>
+    <div ng-hide="!(raise_leftShow||raise_rightShow)">
+      <p><img class="raise-drop" src="../../img/raise.png"/>增幅最大</p>
+      <div class="row">
+        <div class="col col-50" ng-show="raise_leftShow">
+          <div>
+            <div id="raise-leftcharts" class="e_charts_50"></div>
+          </div>
+        </div>
+        <div class="col col-50" ng-show="raise_rightShow">
+          <div>
+            <div id="raise-rightcharts" class="e_charts_50"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-hide="!(drop_leftShow||drop_rightShow)">
+      <p><img class="raise-drop" src="../../img/drop.png"/>降幅最大</p>
+
+      <div class="row">
+        <div class="col col-50" ng-show="drop_leftShow">
+          <div>
+            <div id="drop-leftcharts" class="e_charts_50"></div>
+          </div>
+        </div>
+        <div class="col col-50" ng-show="drop_rightShow">
+          <div>
+            <div id="drop-rightcharts" class="e_charts_50"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</div>

@@ -1,0 +1,33 @@
+<ion-modal-view class="ionic-modal">
+    <ion-header-bar class="bar bar-header bar-balanced">
+        <h4 class="title">推荐给他人</h4>
+    </ion-header-bar>
+
+    <ion-content>
+        <div class="list">
+            <div class="item item-prov">
+                <h3 class="qw-item-ion-rt" on-touch="provShowFn()">省份 <i ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[provsShow]" class="ion"></i><span ng-repeat="provObj in provs | filter:recommend.choiceProv:true">{{provObj.name}}</span></h3>
+                <label ng-show="provsShow" class="item-radio" ng-repeat="p in provs" on-touch="provShowFn()">
+                    <input type="radio" name="provKey" ng-value="p.ID" ng-model="recommend.choiceProv">
+                    <div class="item-content qw-check">
+                        {{p.name}}
+                    </div>
+                </label>
+            </div>
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="搜索用户" ng-model="recommend.searchUser" ng-change="searchUserFn()">
+            </label>
+            <label class="item" ng-repeat="user in recommend.searchUsers.rows" ng-click="choiceUserFn(user)">
+                        {{user.fullname}}
+            </label>
+            <label class="item item-input">
+                <textarea  placeholder="推荐理由(可选)" rows="3" minlength="1" maxlength="200" ng-model="recommend.content"></textarea>
+            </label>
+        </div>
+            <button class="button button-clear button-balanced pull-right" on-touch="closeRecommendModal()">
+                关闭
+            </button>
+            <button type="button" class="button button-clear button-balanced" on-touch="crtRecommendFn()">推荐</button>
+    </ion-content>
+</ion-modal-view>

@@ -1,0 +1,151 @@
+'use strict';
+if(!config){
+    var config = angular.module('config',['ionic']);
+}
+config.constant('resTypes', [{
+    name: '业务类',
+    ID: '2',
+    child: [{
+        name: '客户感知业务',
+        ID: '121'
+    }, {
+        name: 'CAPES',
+        ID: '189'
+    }]
+}, {
+    name: '应用类',
+    ID: '58',
+    child: [{
+        name: 'BOSS系统',
+        ID: '27'
+    }, {
+        name: 'CRM系统',
+        ID: '28'
+    }, {
+        name: 'P-BOSS系统',
+        ID: '29'
+    }, {
+        name: 'BASS系统',
+        ID: '30'
+    }, {
+        name: 'BOMC系统',
+        ID: '31'
+    }, {
+        name: '容灾系统',
+        ID: '140'
+    }, {
+        name: '其它系统',
+        ID: '141'
+    }, {
+        name: '全网监控系统',
+        ID: '186'
+    }]
+}, {
+    name: '逻辑类',
+    ID: '59',
+    child: [{
+        name: '进程',
+        ID: '85'
+    }, {
+        name: '中间件服务',
+        ID: '86'
+    }, {
+        name: '数据库实例',
+        ID: '87'
+    }]
+}, {
+    name: '其他类',
+    ID: '62',
+    child: [{
+        name: 'IT人员',
+        ID: '127'
+    }, {
+        name: '供应商',
+        ID: '128'
+    }, {
+        name: '机房',
+        ID: '129'
+    }, {
+        name: '关键地市',
+        ID: '130'
+    }, {
+        name: '营业厅',
+        ID: '131'
+    }, {
+        name: '其它',
+        ID: '184'
+    }]
+}, {
+    name: '物理类',
+    ID: '119',
+    child: [{
+        name: '小型机',
+        ID: '71'
+    }, {
+        name: '分区服务器',
+        ID: '72'
+    }, {
+        name: 'PC服务器',
+        ID: '73'
+    }, {
+        name: '路由器',
+        ID: '74'
+    }, {
+        name: '网络交换机',
+        ID: '75'
+    }, {
+        name: '磁盘阵列',
+        ID: '76'
+    }, {
+        name: '存储光纤交换机',
+        ID: '77'
+    }, {
+        name: '磁带库',
+        ID: '78'
+    }, {
+        name: '安全设备',
+        ID: '80'
+    }, {
+        name: '操作系统',
+        ID: '63'
+    }, {
+        name: '数据库',
+        ID: '64'
+    }, {
+        name: '交易中间件',
+        ID: '65'
+    }, {
+        name: '集群软件',
+        ID: '66'
+    }, {
+        name: '存储备份软件',
+        ID: '67'
+    }, {
+        name: '系统管理软件',
+        ID: '68'
+    }, {
+        name: '工具软件',
+        ID: '69'
+    }, {
+        name: '安全软件',
+        ID: '70'
+    }, {
+        name: '传输中间件',
+        ID: '183'
+    }, {
+        name: '应用服务器',
+        ID: '185'
+    }, {
+        name: '排队机',
+        ID: '81'
+    }, {
+        name: 'CTI',
+        ID: '82'
+    }, {
+        name: 'IVR',
+        ID: '83'
+    }, {
+        name: 'CCS',
+        ID: '84'
+    }]
+}]);

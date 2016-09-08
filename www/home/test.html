@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>测试</title>
+    <style>
+        body{
+        	height: 400px;
+        	width: 500px;
+        }
+        #one,#two{
+        	position: relative;
+        	margin: 40px;
+        	padding:40px;
+        	height: 300px;
+        	width: 300px;
+        	-webkit-box-sizing: content-box;
+        	-moz-box-sizing: content-box;
+        	box-sizing: content-box;
+        	border: 10px solid #000;
+        }
+        #children{
+        	position: absolute;
+        	top: 0;
+        	left: 0;
+        	height: 100px;
+        	width: 100px;
+        	padding: 10px;
+        	border: 1px solid red;
+        	margin: 5px;
+        }
+    </style>
+</head>
+<body>
+	<span class="aaaa">ffffff</span><span class="aaaa">ddddd</span>
+	<div id="one" onclick="attrOn()" class="">
+		<a id="children" href="index.html"> children fwefwefwef</a>
+	</div>
+	<div id="two" onclick="attrOn()" class="">brother</div>
+</body>
+<script >
+
+
+//  测试setInterval  的执行顺序
+//  
+    // var a= 0;
+    // var s = setInterval(function(){
+    // 	if(a === 3) {
+    // 		clearInterval(s);return false;
+    // 	}
+    // 	a++;
+    // 	var d = new Date();
+    // 	console.log('setInterval   ' + a + ':   ' + Number(d));
+    	
+    // },1000);
+    // setTimeout(function(){
+    // 	var d = new Date();
+    // 	d = Number(d);
+    // 	var  ee = d + 1500;
+    // 	 while(d < ee){
+    // 	 	d = new Date();
+    // 	 	d = Number(d);
+    // 	 }
+    // 	 var e = new Date();
+    // 	 console.log('timeout  end:   ' + Number(e));
+    // 	},1000);
+    // 	
+    // 	
+ 
+// A--------------------------
+var scope = "global scope";
+function checkscope(){
+    // var scope = "local scope";
+    function f(){
+        return scope;
+    }
+    return f();
+}
+
+console.log(checkscope());
+
+// // B---------------------------
+// var scope = "global scope";
+// function checkscope(){
+//     // var scope = "local scope";
+//     function f(){
+//         return scope;
+//     }
+//     return f;
+// }
+// console.log(checkscope()());
+
+
+    var divOne = document.querySelector('#one');
+    function attrOn(){
+    	console.log('attrOn');
+    };
+      divOne.addEventListener('click',function(e){
+		console.log('me: 捕获111！');
+	},true); 
+    divOne.onclick =function(){
+    	console.log('me: onclick one');
+    };	
+
+	divOne.addEventListener('click',function(e){
+		console.log('me: 冒泡1111！');
+	},false);
+	
+
+   var divtwo = document.querySelector('#two');
+	divtwo.addEventListener('click',function(e){
+		console.log('brother: 捕获！');
+	},true);
+	divtwo.addEventListener('click',function(e){
+		console.log('brother: 冒泡！');
+	},false);
+	divtwo.onclick =function(){
+    	console.log('brother: onclick');
+    };
+
+    var divchd = document.querySelector('#children');
+     divchd.addEventListener('click',function(e){
+		console.log('children: 冒泡！');
+		return false;
+		
+	},false);	
+	divchd.onclick =function(){
+    	console.log('children: onclick');
+    		
+    };
+	divchd.addEventListener('click',function(e){
+		console.log('children: 捕获！');
+
+		
+	},true);
+
+
+
+    document.body.addEventListener('click',function(e){
+		console.log('father: 捕获！');
+
+	},true);
+	document.body.addEventListener('click',function(e){
+		console.log('father: 冒泡！');
+
+	},false);
+		document.body.onclick =function(){
+    	console.log('father: onclick');
+    };
+	// document.body.addEventListener('click',function(e){
+	// 	console.log('body');
+	// 	e.stopPropagation();
+	// },false)
+</script>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>全网监控登录</title>
+
+
+    <!-- compiled css output -->
+    <link href="../lib/ionic/css/ionic.min.css" rel="stylesheet">
+    <link href="../user.css" rel="stylesheet">
+    <!-- ionic/angularjs js  
+    <script src="lib/angular-cookies/angular-cookies.js"></script>-->
+    <script src="../lib/ionic/js/ionic.bundle.js"></script>
+    <script src="../lib/ngCordova/dist/ng-cordova.js"></script>
+   
+    <!-- cordova script (this will be a 404 during development) 
+    <script src="cordova.js"></script>
+     -->
+    <!-- md5.js -->
+    <script src="../lib/blueimp-md5/js/md5.js"></script>
+    <!-- your app's js -->
+    <script src="../js/common/js/common-directive.js"></script>
+    <script src="../js/user/setInfo/app.js"></script>
+    <script src="../js/user/setInfo/controller.js"></script>
+   
+    <style>
+            
+             
+    </style>
+
+</head>
+
+
+
+<body ng-app="setInfoApp" ng-controller="setInfoController">
+ <div class="bar bar-header bar-positive">
+    <a class="button button-icon icon ion-ios-undo" href="info.html"></a>
+    <div class="h1 title">修改信息</div>
+    <!--
+    <button class="button button-icon icon ion-archive"></button>
+  -->
+  </div>
+
+ <ion-view>
+        
+        <ion-content class="has-header content">
+            <div class="list mg-top-10 ">
+                <a class="item padding-0 " href="#">
+                    <div class="row" on-touch="userPicShow()">
+                        <h2>用户头像</h2> 
+                        <img class="info-pic " ng-src="#" alt="#">
+                    </div>
+                </a>
+            </div>
+
+            <div class="list mg-top-10">
+                 <div class="item">
+                    用户名
+                    <span class="item-note" ng-bind="userInfo.userKey"></span>
+                </div>
+
+                 <a class="item" type="button" ng-click="openModal1('mobile')">
+                    手机
+                    <span class="item-note" ng-bind="userInfo.mobile"></span>
+                </a>
+
+                  <a class="item" type="button" ng-click="openModal1('email')">
+                    邮箱
+                    <span class="item-note" ng-bind="userInfo.email"></span>
+                </a>
+
+                  <a class="item" type="button" ng-click="openModal1('provName')">
+                    所属省份
+                     <span class="item-note" ng-bind="userInfo.provName"></span>
+                </a>
+
+                <div class="item" >
+                    角色
+                    <span class="item-note" ng-bind="userInfo.roleName"></span>
+                </div>
+                 <!--
+                  <a class="item" type="button" ng-click="openModal1('roleName')">
+                    角色
+                    <span class="item-note" ng-bind="userInfo.roleName"></span>
+                </a>
+              -->
+            </div>
+          
+            <div class="list">
+
+                 <a class="item" type="button" ng-click="openModal()">
+                    修改密码
+                   
+                </a>
+
+                
+                <!--
+               <button class="button button-full button-assertive" ng-click="userSwitch()">
+                 取消修改
+               </button>
+               -->
+            </div>
+           
+            
+        </ion-content>
+    </ion-view>
+
+ <!--修改其它信息模态框-->
+   
+    <script id="change-others-modal.html" type="text/ng-template">
+
+     <div class="modal" id="modal1">
+        
+        
+       <div class="bar bar-header bar-dark" on-drag="dragDown($event)" on-release="resetPosition($event)">
+          
+           <button class="button button-icon icon ion-ios-arrow-thin-left " ng-click="closeModal1()" ></button>
+         
+       
+           <h1 class="title">更改{{status[inputStatus]}}</h1>
+        
+           <button class="button button-large button-balanced" type="submit" ng-click="changeOther(inputStatus)">保存</button>
+       
+        </div>
+
+     <ion-content class="has-header  padding">
+           
+        <!--设置文本输入框格式为一条下划线-->  
+        <input type="text"  style="
+              border-right: #9a9999 0px solid; 
+              border-top:  #9a9999 0px solid; 
+              border-left: #9a9999 0px solid; 
+              width: 800px; 
+              border-bottom: #9a9999 2px  solid;
+              border-bottom-color: green" 
+               ng-bind="userInfo[inputStatus]" value="{{userInfo[inputStatus]}}">
+               
+                    
+    </ion-content>
+    
+      
+     </div>
+
+    </script>
+
+         
+     <!--修改密码模态框-->
+    <script id="change-pwd-modal.html" type="text/ng-template">
+
+        <div class="modal" id="modal">
+        
+        
+            <div class="bar bar-header bar-dark" on-drag="dragDown($event)" on-release="resetPosition($event)">
+                <h1 class="title">密码修改</h1>
+                <div class="buttons">
+                    <button class="button button-clear ion-close-circled" ng-click="closeModal()">
+                    </button>
+                </div>
+            </div>
+
+            <ion-content class="padding has-header">
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">原登录密码：</span>
+                        <input type="password" placeholder="请输入旧密码" ng-model="edit.OldPassword">
+                    </label>
+
+                    <label class="item item-input">
+                        <span class="input-label">新登录密码：</span>
+                        <input type="password" placeholder="请输入新密码" ng-model="edit.newPassword">
+                    </label>
+
+                    <label class="item item-input">
+                        <span class="input-label">确认新密码：</span>
+                        <input type="password" placeholder="请再次输入新密码" ng-model="edit.newPassword2">
+                    </label>
+                </div>
+
+                <button class="button button-full button-balanced" type="submit" ng-click="changePwd()">
+                    确认修改
+                </button>
+            </ion-content>
+      
+        </div>
+
+    </script>
+
+</body>
+
+
+
+</html>
+
+
+
+
+
+

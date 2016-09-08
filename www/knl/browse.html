@@ -1,0 +1,223 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+
+<!--<head>-->
+    <!--<meta charset="utf-8">-->
+    <!--<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">-->
+    <!--<title>知识浏览</title>-->
+
+    <!--&lt;!&ndash; compiled css output &ndash;&gt;-->
+    <!--<link href="../lib/ionic/css/ionic.app.css" rel="stylesheet">-->
+    <!--<link href="css/browse.css" rel="stylesheet">-->
+
+    <!--&lt;!&ndash; ionic/angularjs js &ndash;&gt;-->
+    <!--<script src="../lib/ionic/js/ionic.bundle.js"></script>-->
+    <!--<script src="../lib/ngCordova/dist/ng-cordova.js"></script>-->
+
+    <!--&lt;!&ndash; cordova script (this will be a 404 during development) &ndash;&gt;-->
+    <!--<script type="text/javascript" src="../cordova.js"></script>-->
+    <!--&lt;!&ndash; your app's js &ndash;&gt;-->
+    <!--<script src="js/browse/app.js"></script>-->
+    <!--<script src="js/browse/controller.js"></script>-->
+    <!--<script src="js/browse/service.js"></script>-->
+    <!--<script src="js/browse/directive.js"></script>-->
+    <!--<script src="../common/js/common-directive.js"></script>-->
+    <!--<script src="../common/js/common-filter.js"></script>-->
+    <!--<script src="js/province-data.js"></script>-->
+<!--</head>-->
+
+<!--<body ng-app="browseApp">-->
+<ion-view>
+
+<div class="bar bar-header bar-positive">
+    <div class="buttons">
+        <button class="button button-clear ion-chevron-left" ng-click="goBack()"></button>
+    </div>
+    <h4 class="title">{{vm.knlParams.typeID | knlName}}</h4>
+</div>
+
+<ion-content class="scroll-content">
+    <section class="knl-detail bar-header">
+        <div class="span-font-size">
+            <div class="row">
+                <div class="col">
+                    <span class="span-font-color">标题：</span><span ng-bind="knl.knlCont.title"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span class="span-font-color">创建人：</span><span ng-bind="knl.knlCont.user.fullname"></span>
+                </div>
+                <div class="col">
+                    <span class="span-font-color">所属省份：</span><span ng-bind="knl.knlCont.user.provName"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <span class="span-font-color">浏览次数：</span><span ng-bind="knl.knlCont.visitCount"></span>
+                </div>
+              <!-- <div class="col">
+              <span class="span-font-color">发布时间：</span><span ng-bind="knl.knlCont.lastCheckTime"></span>
+              </div> -->
+                <div class="col">
+                    <span class="span-font-color">评论数：</span><span ng-bind="knl.comment.pageVO.totalRows"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <span class="span-font-color">发布时间：</span><span ng-bind="knl.knlCont.lastCheckTime"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-top span-font-size">
+            <!--<div class="row">-->
+                <!--<div class="col">-->
+                    <!--<span class="span-font-color">分享方式：</span>{{vm.knlParams.typeID | knlName}}-->
+                <!--</div>-->
+                <!--<div class="col">-->
+                    <!--<span class="span-font-color">知识来源：</span><span ng-bind="knl.knlCont.knlSourceName"></span>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="row">
+                <div class="col">
+                    <span class="span-font-color">知识分类：</span><span ng-bind="knl.knlCont.knlResourceTypeName"></span>
+                </div>
+              <div class="col">
+                <span class="span-font-color">关键字：</span><span ng-bind="knl.knlCont.tag"></span>
+              </div>
+                <!--<div class="col">-->
+                    <!--<span class="span-font-color">资源类型：</span><span ng-bind="knl.knlCont.knlResourceTypeName"></span>-->
+                <!--</div>-->
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span class="span-font-color">点赞数：</span><span ng-bind="knl.myKnlcount.up"></span>
+                </div>
+              <div class="col">
+                <span class="span-font-color">下载量：</span><span ng-bind="knl.myKnlcount.download"></span>
+              </div>
+                <!--<div class="col">-->
+                    <!--<span class="span-font-color">资源类型：</span><span ng-bind="knl.knlCont.knlResourceTypeName"></span>-->
+                <!--</div>-->
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span class="span-font-color">推荐数：</span><span ng-bind="knl.myKnlcount.recommend"></span>
+                </div>
+              <div class="col">
+                <span class="span-font-color">收藏量：</span><span ng-bind="knl.myKnlcount.book"></span>
+              </div>
+                <!--<div class="col">-->
+                    <!--<span class="span-font-color">资源类型：</span><span ng-bind="knl.knlCont.knlResourceTypeName"></span>-->
+                <!--</div>-->
+            </div>
+
+            <!--<div class="row">-->
+                <!--<div class="col">-->
+                    <!--<span class="span-font-color">所属系统：</span><span ng-bind="knl.knlCont.knlSysTypeName"></span>-->
+                <!--</div>-->
+                <!--<div class="col">-->
+                    <!--<span class="span-font-color">关键字：</span><span ng-bind="knl.knlCont.tag"></span>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+
+        <article class="knl-detail border-top knl-padding">
+            <h5 class="span-font-color">内容描述：</h5>
+            <p ng-bind-html="knl.knlCont.content|to_trusted"></p>
+        </article>
+
+        <div class="card" ng-show="knl.files[0].attaID !== undefined">
+            <div class="item item-divider">
+                <span><i class="ion-paperclip"></i>&nbsp;&nbsp;附件</span>
+            </div>
+            <div class="item item-text-wrap" ng-click="knlManage.showToast()">
+                <ul class="attachment-list" ng-show="knl.files[0].attaID !== undefined">
+                    <li ng-repeat="f in knl.files">
+                        <!--<a class="down-btn row" ng-click="knlManage.fileDownload(f)">-->
+                        <a class="down-btn row">
+                            <span class="inline-over-elp">{{f.fileName}}</span>
+                            <!--<i class="ion-arrow-down-c"></i>-->
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel panel-warning mg-top-15" ng-show="false">
+            <div class="panel-heading">
+                <label ng-hide="userInfo.id === knl.knlCont.createBy" for="">评分：</label>
+                <div class="comment-score" ng-hide="userInfo.id === knl.knlCont.createBy" score-star my-score="knl.myScoreObj" crt-score="crtScore(score)"></div>
+                <ul class="pull-right inline-ul">
+                    <li ng-if="knl.knlCont.createBy === userInfo.userKey || (userInfo.roleID === 3  && knl.knlCont.knlDimension === 1 ) || (userInfo.roleID === 4 && knl.knlCont.knlDimension === 0) ">
+                        <button class="btn-def-off" ng-click="knlManage.knlDiscard(vm.knlParams.typeID,vm.knlParams.knlID)">
+                            <i class="ion-android-cancel"></i>&nbsp;<span>废弃</span>
+                        </button>
+                    </li>
+                    <li ng-hide="userInfo.id === knl.knlCont.createBy">
+                        <button class="btn-def-off" knl-recommend>
+                            <i class="ion-share"></i>&nbsp;<span>推荐</span>
+                        </button>
+                    </li>
+                    <li ng-hide="userInfo.id === knl.knlCont.createBy">
+                        <button class="btn-def-off" knl-favorite>
+                            <i class="ion-ios-heart"></i>&nbsp;<span>收藏</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="comment-list panel panel-info" ng-show="false">
+            <div class="panel-heading">
+                <span>评论</span>
+                <small>
+                            (共<span ng-bind="knl.comment.pageVO.totalRows"></span>条)
+                        </small>
+            </div>
+
+            <ion-list>
+                <ion-item ng-repeat="cl in knl.comment.rows">
+                    <h4>
+                                {{cl.user.fullname}}
+                                <small class="pull-right">
+                                    {{cl.createTime}}
+                                </small>
+                            </h4>
+                    <p ng-bind-html="cl.content|to_trusted"></p>
+                    <i class="ion-thumbsup best-right" ng-if="knl.knlCont.isClose === 0 && knl.knlCont.createBy === userInfo.userKey && knl.knlCont.createBy !== cl.createBy" ng-click="choiceBst(cl)"></i>
+                </ion-item>
+
+                <!--加载更多-->
+                    <button class="button button-clear button-calm button-all" ng-show="knl.comment.pageVO.curPage < knl.comment.pageVO.totalPages" on-touch="getCommentMore()">加载更多...</button>
+                    <div class="span-ct" ng-show="knl.comment.rows.length == 0">暂无评论...</div>
+                    <div class="span-ct" ng-show="knl.comment.pageVO.curPage === knl.comment.pageVO.totalPages">到底了...</div>
+            </ion-list>
+        </div>
+
+    </section>
+</ion-content>
+
+<footer id="footer" ng-show="false">
+    <div class="foot-comment" ng-init="commentRows = 1">
+    <textarea class="textarea" placeholder="评论..." rows="{{commentRows}}" ng-model="crtComment.content" ng-focus="commentRows = 3" ng-blur="commentRows = 1" required></textarea>
+    <button class="button button-small button-light" title="发送" ng-click="knlManage.crtComment(vm.knlParams.typeID,vm.knlParams.knlID,crtComment,knl)">
+    发送
+    </button>
+    </div>
+
+</footer>
+</ion-view>
+<!-- <div>
+
+
+<div class="pull-right">
+
+    </div></div> -->
+<!--</body>-->
+
+<!--</html>-->

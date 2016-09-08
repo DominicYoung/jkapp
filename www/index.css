@@ -1,0 +1,89 @@
+body {
+    font-family: "Microsoft Yahei", "Heiti SC", Arial, sans-serif;
+}
+
+
+.index-content {
+    /*margin: 40px 20px 0 20px;*/
+}
+
+.center {
+    display: block;
+    height: 75px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.qw-item-i {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.label-line, .input-radius {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    margin-top: 20px !important;
+}
+
+.label-line > input {
+    height: 32px;
+    line-height: 24px;
+    font-size: 16px;
+}
+
+.input-radius {
+    height: 32px;
+    line-height: 1.5;
+    font-size: 16px;
+    border: 0;
+}
+
+.loading-container .loading {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.land-sub {
+    display: block;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.user-list {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    z-index: 100;
+    padding: 0 10px;
+    width: 100%;
+}
+
+.user-list .item {
+    padding: 6px;
+    width: 100%;
+}
+
+.user-list .item-icon-left .icon:before, .user-list .item-icon-right .icon:before {
+    font-size: 16px;
+}
+
+.user-list .name-span {
+    display: inline-block;
+    width: calc(100% - 32px);
+}
+
+.user-info
+{
+    position: relative;
+    font-size: 16px;
+    height: 100px;
+    margin-top: 13px;
+    margin-bottom: 10px;
+    padding: 0;
+    background-color: #fffff3!important;
+}
+
+.register-content{
+    display: block;
+    position: relative;
+    width: 100%;
+}

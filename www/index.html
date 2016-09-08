@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>全网监控登录</title>
+        <!-- compiled css output -->
+        <link href="lib/ionic/css/ionic.app.css" rel="stylesheet">
+        <script id="baseUrl" type="text/javascript">
+                            var storage = window.localStorage,
+                                // baseUrl = 'https://jkzx.archclearing.com';
+           // baseUrl = 'http://192.168.191.1:8080';
+           baseUrl = 'http://jkzx.archclearing.com:8180';
+                                storage['baseUrl'] = baseUrl;
+        </script>
+
+        
+        <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+        <link href="index.css" rel="stylesheet">
+        <link href="home/css/index.css" rel="stylesheet">
+        <link href="user/user.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+
+        <link href="common/css/slider.css" rel="stylesheet">
+        <link href="common/css/calender.css" rel="stylesheet">
+        <link href="important-event/css/index.css" rel="stylesheet">
+        <link href="important-event/css/monthy.css" rel="stylesheet">
+        <link href="knl/css/browse.css" rel="stylesheet">
+
+      <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above-->
+
+      <!-- ionic/angularjs js -->
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+      <!-- cordova script (this will be a 404 during development) -->
+        <script src="cordova.js"></script>
+        <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+        <script src="common/js/check-update.js"></script>
+        <script src="common/js/push.js"></script>
+        <!-- md5.js -->
+        <script src="lib/blueimp-md5/js/md5.js"></script>
+        <!-- your app's js -->
+        <script src="index.js"></script>
+
+        <script type="text/javascript" src="lib/angular-cookies/angular-cookies.js"></script>
+        <script src="common/js/common-directive.js"></script>
+
+    </head>
+    <body ng-app="indexApp">
+    <ion-nav-view animation="slide-left-right">
+
+      <!-- 首页内容开始 -->
+      <!--<section ui-view class="content">-->
+
+      <!--</section>-->
+      <!-- 首页头部结束 -->
+
+    </ion-nav-view>
+
+    </body>
+    <script id ="register.html" type="text/ng-template">
+        <ion-modal-view>
+            <header class="bar bar-header bar-positive">
+                <h1 class="title">新用户注册</h1>
+                <button title="关闭用户注册页面" class="button button-icon icon ion-close-circled" on-touch="registerCloseModal()" ></button>
+            </header>
+        <div class="register-content has-header">
+            <div class="list">
+                <label class="item item-input">
+                                <span class="input-label">用户名称：</span>
+                                <input type="text" placeholder="请输入用户名称" >
+                </label>
+                <label class="item item-input">
+                                <span class="input-label">登录密码：</span>
+                                <input type="password" placeholder="请输入登录密码" >
+                </label>
+                <label class="item item-input">
+                                <span class="input-label">确认密码：</span>
+                                <input type="password" placeholder="请再次输入登录密码" >
+                </label>
+            </div>
+            <div class="padding">
+                <button class="button button-full button-positive" type="submit">
+                    确认注册
+                </button>
+            </div>
+
+        </div>
+        </ion-modal-view>
+    </script>
+
+    <script src="common/js/check-update.js"></script>
+    <script src="common/js/slider.js"></script>
+    <script src="common/js/calender.js"></script>
+    <script src="common/js/check-update.js"></script>
+    
+    <!-- your app's js -->
+    <script src="home/js/index-app.js"></script>
+    <script src="home/js/router.js"></script>
+    <script src="home/js/service.js"></script>
+    <script src="home/js/index-controller.js"></script>
+    <script src="home/js/nav-data.js"></script>
+    <script src="home/js/knl-nav.js"></script>
+    <script src="home/js/config-res.js"></script>
+    <script src="home/js/config-sys.js"></script>
+    <script src="home/js/province-data.js"></script>
+
+    <!--月报-->
+    <script src="important-event/js/app.js"></script>
+    <script src="important-event/js/echarts-data.js"></script>
+    <script src="important-event/js/parse-config.js"></script>
+    <script src="important-event/js/service.js"></script>
+    <script src="important-event/js/monthyDataService.js"></script>
+    <script src="important-event/js/monthyDetailService.js"></script>
+    <script src="important-event/js/mothyDetailParseService.js"></script>
+    <script src="important-event/js/echartsService.js"></script>
+    <script src="important-event/js/controller.js"></script>
+    <script src="important-event/js/directive.js"></script>
+    <script src="lib/echarts.js"></script>
+    <script src="lib/ionic-datepicker.bundle.min.js"></script>
+    <script src="lib/jquery-2.2.2.min.js"></script>
+
+    <!-- your browse app's js -->
+    <script src="knl/js/browse/app.js"></script>
+    <script src="knl/js/browse/controller.js"></script>
+    <script src="knl/js/browse/service.js"></script>
+    <script src="knl/js/browse/directive.js"></script>
+    <script src="common/js/common-directive.js"></script>
+    <script src="common/js/common-filter.js"></script>
+    <script src="knl/js/province-data.js"></script>
+
+    <!-- your user app's js -->
+    <script src="user/js/userApp.js"></script>
+    <script src="user/js/userctrl.js"></script>
+    <script src="user/js/services.js"></script>
+    <script src="user/js/info/app.js"></script>
+    <script src="user/js/info/controller.js"></script>
+    <script src="user/js/knl/app.js"></script>
+    <script src="user/js/knl/controller.js"></script>
+    <script src="user/js/knl/filter.js"></script>
+    <script src="user/js/favorite/app.js"></script>
+    <script src="user/js/favorite/controller.js"></script>
+    <script src="user/js/favorite/filter.js"></script>
+    <script src="user/js/recommend/app.js"></script>
+    <script src="user/js/recommend/controller.js"></script>
+    <script src="user/js/recommend/filter.js"></script>
+    <script src="user/js/file/app.js"></script>
+    <script src="user/js/file/controller.js"></script>
+    <script src="user/js/file/service.js"></script>
+</html>

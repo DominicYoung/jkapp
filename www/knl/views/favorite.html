@@ -1,0 +1,27 @@
+<!--添加到收藏夹-->
+<ion-modal-view class="ionic-modal">
+<div>
+    <ion-header-bar class="bar bar-header bar-royal">   <button class="button button-icon icon ion-ios-arrow-back" on-touch="closeFavoriteModal()"></button>
+        <h4 class="title">添加到收藏夹</h4>
+        <button class="button button-icon icon ion-ios-plus-outline" on-touch="crtFavoriteShowFn()"></button>
+    </ion-header-bar>
+
+    <ion-content>
+        <ul class="list list-inset">
+            <li class="item" ng-repeat="knlFav in favorites.child" on-touch="collectFn(knlFav.groupID)">
+                <a>{{knlFav.groupName}}
+                        <i ng-class="{true:'ion-checkmark-circled pull-right', false:''}[knlFav.choiced]"></i>
+                    </a>
+            </li>
+            
+        </ul>
+        <div ng-show="editBmShow" class="list list-inset">
+            <label class="item item-input">
+                <input type="text" ng-model="crtFav.groupName" placeholder="请输入收藏夹名称">
+            </label>
+            <button class="button button-clear button-royal pull-right" on-touch="crtFavoriteHideFn()">取消</button>
+            <button class="button button-clear button-royal" on-touch="crtFavorite()">创建</button>
+        </div>
+    </ion-content>
+</div>
+</ion-modal-view>

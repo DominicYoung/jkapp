@@ -1,0 +1,34 @@
+<ion-view class="index-content">
+  <img src="img/osmc-land.jpg" class="center" alt="">
+  <form name="landForm" class="list" id="land-form" ng-submit="submitForm()" novalidate>
+    <div class="user-info">
+      <div class="item item-input label-line">
+        <input name="username" ng-model="user.userName" type="text" placeholder="用户名" required>
+        <i class="qw-item-i icon ion-close-circled" ng-click="user.userName = ''" ng-show="user.userName"></i>
+        <i class="qw-item-i icon ion-chevron-down" on-touch="userListShow()" ng-show="userList.rows.length > 0"></i>
+      </div>
+      <ul class="user-list" ng-show="userList.show">
+        <a ng-repeat="u in userList.rows" class="item item-icon-right" href="#" >
+          <span class="name-span" on-touch="choiceUser(u.name)">{{u.name}}</span>
+          <i class="icon ion-close" on-touch="rmUserList(u)"></i>
+        </a>
+      </ul>
+
+    <div class="item item-input label-line">
+      <input name="userpwd" ng-model="user.pwd" type="password" placeholder="密码" required>
+      <i class="qw-item-i icon ion-close-circled" ng-click="user.pwd=''" ng-show="user.pwd"></i>
+    </div>
+    <div class="item item-input label-line">
+      <input ng-model="user.verifycode" type="text" required>
+      <img id="code-img" class="qw-item-i" ng-click="verifyCode()" />
+    </div>
+    <span class="assertive" ng-bind="error.text" ng-show="error.show"></span>
+    <button type="submit" class="button button-block button-positive input-radius">
+      登录
+    </button>
+    </div>
+    <!--   <button type="button" class="button button-block button-positive input-radius" on-touch="registerOpenModal()">
+                                                                                新用户注册
+    </button> -->
+  </form>
+</ion-view>

@@ -1,0 +1,108 @@
+<ion-header-bar class="bar-positive">
+        <div class="buttons">
+            <button class="button button-clear ion-chevron-left" ui-sref="tab.user">&nbsp;返回</button>
+        </div>
+        <h1 class="title">账户管理</h1>
+
+</ion-header-bar>
+
+<ion-view class="user-detail">
+
+    <ion-content class="has-header">
+        <div class="list mg-top-10">
+            <a class="item padding-0" href="#">
+                <div class="row" on-touch="userPicShow()">
+                    <h2>用户头像</h2>
+                    <img class="info-pic" ng-src="http://59.40.182.77:8088/bskm{{userInfo.photo}}" alt="头像">
+                </div>
+            </a>
+        </div>
+
+
+        <div class="list mg-top-10">
+            <div class="item">
+                账户名
+                <span class="item-note" ng-bind="userInfo.userKey"></span>
+            </div>
+
+            <div class="item">
+                电话
+                <span class="item-note" ng-bind="userInfo.mobile"></span>
+            </div>
+
+            <div class="item">
+                所属省份
+                <span class="item-note" ng-bind="userInfo.provName"></span>
+            </div>
+
+            <div class="item">
+                邮箱
+                <span class="item-note" ng-bind="userInfo.email"></span>
+            </div>
+
+            <div class="item">
+                角色
+                <span class="item-note" ng-bind="userInfo.roleName"></span>
+            </div>
+
+            <div class="item">
+                知识贡献数据
+                <span class="item-note" ng-bind="userInfo.knlCount"></span>
+            </div>
+
+            <div class="item">
+                知识积分
+                <span class="item-note" ng-bind="userInfo.knlCredit"></span>
+            </div>
+        </div>
+
+        <div class="list">
+            <a class="item" type="button" ng-click="openModal()">
+                修改密码
+                <i class="ion-chevron-right pull-right"></i>
+            </a>
+        </div>
+        <button class="button button-full button-light" ng-click="userSwitch()">
+            切换用户
+        </button>
+    </ion-content>
+</ion-view>
+
+
+<!--修改密码模态框-->
+<script id="change-pwd-modal.html" type="text/ng-template">
+
+    <div class="modal" id="modal">
+    
+        <div class="bar bar-header bar-positive" on-drag="dragDown($event)" on-release="resetPosition($event)">
+            <h1 class="title">密码修改</h1>
+            <div class="buttons">
+                <button class="button button-clear ion-close-circled" ng-click="closeModal()">
+                </button>
+            </div>
+        </div>
+
+        <ion-content class="padding has-header">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">原登录密码：</span>
+                    <input type="password" placeholder="请输入旧密码" ng-model="edit.OldPassword">
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">新登录密码：</span>
+                    <input type="password" placeholder="请输入新密码" ng-model="edit.newPassword">
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">确认新密码：</span>
+                    <input type="password" placeholder="请再次输入新密码" ng-model="edit.newPassword2">
+                </label>
+            </div>
+
+            <button class="button button-full button-positive" type="submit" ng-click="changePwd()">
+                确认修改
+            </button>
+        </ion-content>
+    </div>
+</script>

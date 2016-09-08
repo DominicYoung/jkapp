@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+
+.row-wrap{
+    flex-warp: wrap;
+}
+.row-wrap>nav{
+    padding-left: 10px;
+}
+.button-subheader{
+    display: block;
+    top: 44px;
+    padding: 5px 5px 0;
+}
+
+.button-subheader > .button{
+    position: relative!important;
+}
+
+.button.pull-right{
+    position: relative;
+    display: block;
+    float: right;
+    right: 5px;
+}
+.button-gray{
+    display: inline-block;
+    min-width: 80px;
+    margin-right: 1px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    font-weight: 400;
+    color: #000;
+}
+.button-gray.active{
+    height: 100%;
+    background-color: #fff;
+    border-radius: 5px 5px 0 0;
+    border:  1px solid #f0f0f0;
+    border-bottom: none; 
+}
+
+.choice-nav{
+    display: block;
+    position: absolute;
+    top: 88px;
+    left: 0;
+    width: 100%;
+}

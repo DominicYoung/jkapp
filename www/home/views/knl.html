@@ -1,0 +1,59 @@
+<!-- 首页头部开始 -->
+<header class="bar bar-header bar-positive">
+    <!-- <button class="button button-clear button-pre" on-touch="vm.knl.changeAuthority()" ng-bind="vm.knl.authority ==='all' ? '全网':'省级'">
+    </button> -->
+    <button class="button button-clear button-pre">全网
+    </button>
+    <h1 class="title">知识共享</h1>
+    <!-- <button class="button button-clear" on-touch="vm.openSearchModal()">
+        <i class="icon ion-ios-search"></i>
+    </button> -->
+</header>
+<!-- 首页头部结束 -->
+<!-- 知识共享部分 -->
+<section class="content-body">
+    <div id="knl" class="flex-vt stable-bg ">
+        <div id="knlNav" class="tabs">
+            <a class="tab-item" ng-class="{active:k.active}" ng-repeat="k in vm.knlNav" ng-click="vm.changeKnl(k.id)">
+            <i class="icon {{k.ion}}"></i>
+            {{k.label}}
+            </a>
+        </div>
+        <div id="knl-list" class="col-vt" on-swipe-right="vm.swipePre(vm.knlActive)" on-swipe-left="vm.swipeNext(vm.knlActive)">
+            <!--<div id="hot-list" ng-hide="vm.knl.searched">-->
+            <div id="hot-list" ng-show="false">
+                <div class="list-header">
+                    最热知识
+                </div>
+                <a class="list-item" ng-repeat="h in vm.knl.hotList" ng-href="knl/browse.html#/{{vm.knlActive}}/{{h.knlID}}">
+                <div class="item item-divider">
+                <h2> {{h.title}}</h2></div>
+                </a>
+            </div>
+            <div id="new-list">
+                <div class="list-header" ng-hide="vm.knl.searched">
+                    最新知识
+                </div>
+                <a class="list-item" ng-repeat="r in vm.knl.newList.rows" ng-href="#/browse/{{vm.knlActive}}/{{r.knlID}}">
+                <div class="item item-divider">
+                    <h2>{{r.title}}</h2>
+                    <div class="item-nav">
+                        <div class="label-lf"  ng-show="false"><span>{{r.fullname}}</span></div>
+                        <div class="label-rt">
+                            <span>
+                            <i class="icon ion-ios-eye"></i>
+                            {{r.visitCount}}
+                            </span>
+                            <span ng-show="false">
+                            <i class="icon ion-chatbox"></i>
+                            {{r.rankCount}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <div class="list-more" ng-if="!vm.moreData.CanBeLoaded" on-touch="vm.knl.getNewListMore()">{{vm.knl.newListRemind}}</div>
+            </div>
+        </div>
+    </div>
+</section>

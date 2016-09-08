@@ -1,0 +1,32 @@
+
+<ion-view>
+    <div class="bar bar-header bar-dark">
+        <div class="buttons">
+            <button class="button button-clear ion-chevron-left"></button>
+        </div>
+        <h1 class="title">密码修改</h1>
+    </div>
+
+    <ion-content class="has-header mg-top-20">
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">原登录密码：</span>
+                <input type="password" placeholder="请输入旧密码" ng-model="edit.OldPassword">
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label">新登录密码：</span>
+                <input type="password" placeholder="请输入新密码" ng-model="edit.newPassword">
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label">确认新密码：</span>
+                <input type="password" placeholder="请再次输入新密码" ng-model="edit.newPassword2">
+            </label>
+        </div>
+
+        <button class="button button-full button-balanced" ng-click="changePwd()">
+            确认修改
+        </button>
+    </ion-content>
+</ion-view>

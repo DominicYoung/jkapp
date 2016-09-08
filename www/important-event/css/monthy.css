@@ -1,0 +1,204 @@
+@charset "UTF-8";
+#overall-situation {
+  margin-top: 10px
+}
+
+.section-bar {
+  padding: 10px;
+  background: -webkit-linear-gradient(#387ef5, #C5D7E2);
+  background: -o-linear-gradient(#387ef5, #C5D7E2);
+  background: -moz-linear-gradient(#387ef5, #C5D7E2);
+  background: linear-gradient(#387ef5, #C5D7E2);
+}
+
+.section-content {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.button_group {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.charts_content {
+  text-align: right;
+}
+
+.row-content {
+  width: 100%;
+  height: auto;
+}
+
+.row-content.row-left {
+  float: left;
+  width: 50%;
+  height: auto;
+}
+
+.e_charts {
+  position: relative;
+  left: 0;
+  height: 250px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.e_charts_pie {
+  position: relative;
+  left: 0;
+  height: 180px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.center_charts {
+  position: relative;
+  left: 0;
+  height: 500px;
+  padding: 10px;
+}
+
+.e_charts_50 {
+  width: 170px;
+  height: 180px;
+  margin-bottom: 10px;
+}
+
+.e_charts_large {
+  position: relative;
+  left: 0;
+  height: 1000px;
+  padding: 10px;
+}
+
+.section-title.left {
+  color: #fff;
+}
+
+.sub-section-bar {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 1em;
+  background: grey;
+}
+
+.section-more.right {
+  position: absolute;
+  right: 10px;
+  color: #387ef5;
+}
+
+.section-more.right.more {
+  color: #000;
+}
+
+.section-half.right.more {
+  position: relative;
+  left: 10px;
+  color: #000;
+}
+
+.ion-arrow-up-c {
+  color: #387ef5;
+}
+
+.ion-arrow-down-c {
+  color: #f5441c;
+}
+
+p.text {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.text.important-title {
+  padding-left: 1em;
+}
+
+p.text-detail {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.list-item > .item-divider {
+  background-color: #fff;
+}
+
+.hot-list li {
+  display: block;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
+.hot-list li span {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  font-size: 8px;
+}
+
+.hot-ioc:before {
+  position: relative;
+  content: '【热】';
+  left: auto;
+  width: auto;
+  line-height: 31px;
+}
+
+.list-more {
+  text-align: center;
+  font-size: 15px;
+  margin: 5px 0;
+  color: #0E732B;
+}
+.detail-month{
+  position:relative;
+}
+
+.full-screen{
+  position:absolute;
+  z-index: 10;
+  height:30px;
+  width:30px;
+  right:15px;
+  top:20px;
+}
+.full-screen img{
+  height:100%;
+  width:100%;
+  border:none;
+}
+
+p img.raise-drop {
+  margin-left: 10px;
+  height:30px;
+  width:30px;
+}
+
+.more {
+  display: inline-block;
+  width: 40px;
+}
+
+body,.modal{
+  background: rgb(251, 255, 240);
+}
+
+.description {
+  text-indent: 2em;
+  word-break: break-all;
+  padding: 0px 10px;
+}
+
+.top-description {
+  font-size: 1em;
+  word-break: break-all;
+  text-indent: 2em;
+  padding: 0px 10px;
+  line-height: 20px;
+}

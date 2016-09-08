@@ -1,0 +1,139 @@
+<ion-header-bar class="bar-positive">
+    <div class="buttons">
+        <button class="button button-clear ion-chevron-left" ng-click="goBack()"></button>
+    </div>
+    <h1 class="title">{{knl.knlCont.fullname}}的提问</h1>
+</ion-header-bar>
+
+<ion-content class="scroll-content">
+
+    <section class="knl-detail">
+        <div class="row">
+            <div class="col knl-title">
+                {{knl.knlCont.title}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <span class="span-font-color">知识类型：</span><span ng-bind="knl.knlCont.knlTypeName"></span>
+            </div>
+            <div class="col">
+                <span class="span-font-color">知识来源：</span><span ng-bind="knl.knlCont.knlSourceName"></span>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+                <span class="span-font-color">所属系统：</span><span ng-bind="knl.knlCont.knlSysTypeName"></span>
+            </div>
+            <div class="col">
+                <span class="span-font-color">资源类型：</span><span ng-bind="knl.knlCont.knlResourceTypeName"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <span class="span-font-color">描述：</span>
+                <p ng-bind-html="knl.knlCont.content|to_trusted"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <span class="span-font-color">标签：{{knl.knlCont.tag}}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <span class="span-font-color">{{knl.knlCont.createTime}}</span>
+            </div>
+            <div class="col col-right">
+                <span class="span-font-color"><i class="ion-chatbox-working"></i>&nbsp;&nbsp;{{knl.knlCont.rankCount}}人回答</span>
+            </div>
+        </div>
+
+        <section ng-if="knl.knlCont.isFinish === 1">
+            <div class="row top-dashed">
+                <div class="col">
+                    {{knl.knlCont.bestAnswer.fullname}}
+                </div>
+                <div class="col col-right">
+                    <span class="span-font-color">{{knl.knlCont.bestAnswer.createTime}}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <p ng-bind-html="knl.knlCont.bestAnswer.content|to_trusted">
+            </div>
+        </section>
+
+        <section>
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <span class="mg-rt-5" ng-if="knl.knlCont.isClose === 1">已关闭</span>
+
+                    <ul class="pull-right inline-ul">
+                        <li>
+                            <button class="btn-def-off" ng-if="(knl.knlCont.createBy === userInfo.userKey || userInfo.roleID === 3) && knl.knlCont.isClose === 0" ng-click="questionClose()">
+                                <i class="ion-eye-disabled"></i>&nbsp;<span>关闭问答</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn-def-off" ng-if="knl.knlCont.createBy === userInfo.userKey || (userInfo.roleID === 3  && knl.knlCont.knlDimension === 1 ) || (userInfo.roleID === 4 && knl.knlCont.knlDimension === 0) " ng-click="knlDiscard()">
+                                <i class="ion-android-cancel"></i>&nbsp;<span>废弃</span>
+                            </button>
+                        </li>
+                        <li ng-hide="userInfo.id === knl.knlCont.createBy">
+                            <button class="btn-def-off" knl-recommend>
+                                <i class="ion-share"></i>&nbsp;<span>推荐</span>
+                            </button>
+                        </li>
+                        <li ng-hide="userInfo.id === knl.knlCont.createBy">
+                            <button class="btn-def-off" knl-favorite>
+                                <i class="ion-ios-heart"></i>&nbsp;<span>收藏</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="panel-body" ng-if="knl.knlCont.isClose === 0">
+                    <label for="">我来回答</label>
+                    <textarea class="textarea" placeholder="写下你的回答..." rows="3" ng-model="crtComment.content" required></textarea>
+
+                    <div class="pull-right">
+                        <button class="button button-small button-light" title="提交回答" ng-click="crtComment.crtFn()">提交回答</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment-list panel panel-info">
+                <div class="panel-heading">
+                    <span>回复</span>
+                    <small>
+                                (共<span ng-bind="knl.knlCont.rankCount"></span>条回复)
+                            </small>
+                </div>
+
+                <ion-list>
+                    <ion-item ng-repeat="cl in knl.comment.rows">
+                        <h4>
+                                    {{cl.user.fullname}}
+                                    <small class="pull-right">
+                                        {{cl.createTime}}
+                                    </small>
+                                </h4>
+                        <p ng-bind-html="cl.content|to_trusted"></p>
+                        <i class="ion-thumbsup best-right" ng-if="knl.knlCont.isClose === 0 && knl.knlCont.createBy === userInfo.userKey && knl.knlCont.createBy !== cl.createBy" ng-click="choiceBst(cl)"></i>
+                    </ion-item>
+
+                    <!--加载更多-->
+                    <button class="button button-clear button-calm button-all" ng-show="knl.comment.pageVO.curPage < knl.comment.pageVO.totalPages" on-touch="getCommentMore()">加载更多...</button>
+                    <div class="span-ct" ng-show="knl.comment.pageVO.curPage > knl.comment.pageVO.totalPages">暂无评论...</div>
+                    <div class="span-ct" ng-show="knl.comment.pageVO.curPage === knl.comment.pageVO.totalPages">到底了...</div>
+                </ion-list>
+            </div>
+        </section>
+    </section>
+</ion-content>

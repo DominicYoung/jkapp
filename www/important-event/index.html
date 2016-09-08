@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>重大事件</title>
+    <!-- compiled css output -->
+    <link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+    <!-- <link href="../common/css/.css" rel="stylesheet"> -->
+    <!-- <link href="css/user.css" rel="stylesheet"> -->
+    <link href="css/index.css" rel="stylesheet">
+    <!-- ionic/angularjs js  
+    <script src="lib/angular-cookies/angular-cookies.js"></script>-->
+    <script src="../lib/ionic/js/ionic.bundle.js"></script>
+    <script src="../lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/service.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/echarts.min.js"></script>
+</head>
+
+<body ng-app="impApp" ng-controller="ctrl.imp">
+    <!-- 首页头部开始 -->
+    <ion-header-bar class="bar bar-positive">
+        <a class="button button-clear icon {{back}}">返回</a>
+        <h1 class="title">重大事件详情</h1>
+    </ion-header-bar>
+    <!-- 首页头部结束 -->
+    <ion-content class="content">
+        <div class="row">
+            <!--   <a class="icon ion-arrow-right-b postion-left"></a> -->
+            <ion-list class="issue-content issue-brief postion-right col-90">
+                <ion-item class="issue-time">
+                    9:30到10点
+                </ion-item>
+                <ion-item class="issue-time">
+                    持续时间
+                </ion-item>
+                <ion-item class="issue-time">
+                    影响渠道
+                </ion-item>
+                <ion-item class="issue-time">
+                    影响业务
+                </ion-item>
+            </ion-list>
+        </div>
+        <ion-list class="issue-detail">
+            <ion-item>
+                <a class="item item-icon-right" ng-click="show('progressShow')"><h2>重大事件处理进度</h2><i class="icon {{progressArrow}}"></i></a>
+            </ion-item>
+            <ion-list ng-show="progressShow">
+                <ion-item class="item issue-detail-item">
+                    <span>10:25</span>
+                    <span>关闭重大事件</span>
+                    <span>已恢复。</span>
+                </ion-item>
+            </ion-list>
+            <ion-item>
+                <a class="item item-icon-right" ng-click="show('orderShow')"><h2>重大事件关联工单列表</h2><i class="icon {{orderArrow}}"></i></a>
+            </ion-item>
+            <ion-list ng-show="orderShow">
+                <ion-item class="issue-detail-item">
+                    <span>上海--CIM32652</span>
+                    <span>上海某某显示了多少不知道</span>
+                </ion-item>
+                <ion-item class="issue-detail-item">
+                    <span>上海--CIM32652</span>
+                    <span>上海某某显示了多少不知道</span>
+                </ion-item>
+                <ion-item class="issue-detail-item">
+                    <span>上海--CIM32652</span>
+                    <span>上海某某显示了多少不知道</span>
+                </ion-item>
+            </ion-list>
+            <ion-item>
+                <a class="item item-icon-right" ng-click="show('capacityShow')"><h2>重大事件影响-业务可用性&性能</h2><i class="icon {{capacityArrow}}"></i></a>
+               
+            </ion-item>
+             <div class="charts-div" ng-show="capacityShow">
+                    <div id="echarts" class="issue-detail-item" style="width: 400px;height:400px;"></div>
+                    <a class="item block other-item item-check-detail">查看可用详情>></a>
+                </div>
+            <ion-item>
+                <a class="item item-icon-right" ng-click="show('businessShow')"><h2>重大事件影响-业务量</h2><i class="icon {{businessArrow}}"></i></a>
+            </ion-item>
+            <ion-list class="issue-detail-item" ng-show="businessShow">
+                <ion-item class="issue-detail-item">
+                    <span>上海--CIM32652</span>
+                    <span>上海某某显示了多少不知道</span>
+                </ion-item>
+            </ion-list>
+        </ion-list>
+    </ion-content>
+</body>
+
+</html>

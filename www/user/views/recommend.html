@@ -1,0 +1,62 @@
+ <ion-view>
+    <ion-side-menus enable-menu-with-back-views="false">
+        <ion-side-menu-content>
+
+            <ion-nav-bar class="bar-positive">
+                <!--返回按钮-->
+                <ion-nav-back-button ui-sref="tab.user"></ion-nav-back-button>
+
+                <ion-nav-buttons side="right">
+                    <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+                    </button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+
+            <ion-header-bar class="bar-positive">
+                <h1 class="title title-center">推荐给我</h1>
+            </ion-header-bar>
+
+            <!--菜单详情主页面-->
+            <ion-content delegate-handle="knlsScroll">
+                <ion-list show-delete="shouldShowDelete" can-swipe="listCanSwipe">
+                    <ion-item ng-repeat="knl in knlList.rows"  ng-href="#/browse/{{knl.knlModule}}/{{knl.knlID}}">
+                            <h2 ng-bind-html="knl.title" ></h2>
+                        <div class="row">
+                            <div class="col font-size-color">
+                                推荐人：<span ng-bind="knl.recommendFrom"></span>
+                            </div>
+                            <div class="col font-size-color">
+                                推荐时间：<span ng-bind="knl.createTime | dateDay"></span>
+                            </div>
+                        </div>
+                            <p>
+                                推荐理由：<span ng-bind="knl.reason||'无'"></span>
+                            </p>
+                        <ion-option-button class="button-assertive" ng-click="deleteKnl(knl)">
+                            删除
+                        </ion-option-button>
+                    </ion-item>
+                </ion-list>
+                <div class="span-ct" ng-if="!moreData.CanBeLoaded">{{moreData.loadedRemind}}</div>
+                <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="getknlList()" distance="1%">
+                </ion-infinite-scroll>
+            </ion-content>
+        </ion-side-menu-content>
+
+        <ion-side-menu side="right">
+            <ion-header-bar class="bar-dark">
+                <h1 class="title">知识分类</h1>
+            </ion-header-bar>
+            <ion-content>
+                <ion-list>
+                    <ion-item nav-clear menu-close ng-click="choiceType(-1)">全部</ion-item>
+                    <ion-item nav-clear menu-close ng-click="choiceType(0)">经验案例</ion-item>
+                    <ion-item nav-clear menu-close ng-click="choiceType(1)">问答</ion-item>
+                    <ion-item nav-clear menu-close ng-click="choiceType(2)">技术文档</ion-item>
+                    <ion-item nav-clear menu-close ng-click="choiceType(3)">词条</ion-item>
+                    <ion-item nav-clear menu-close ng-click="choiceType(4)">已知问题库</ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-side-menu>
+    </ion-side-menus>
+</ion-view>

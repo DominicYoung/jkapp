@@ -1,0 +1,132 @@
+<!-- 首页头部开始 -->
+<header class="bar bar-header bar-positive">
+  <!--<h1 class="title" ng-bind="choiceNav.label">首页</h1>-->
+  <h1 class="title">首页</h1>
+</header>
+<!-- 首页头部结束 -->
+<!-- 首页部分 -->
+<ion-content class="content-body">
+  <div id="home" class="home-page">
+    <!-- 轮播模块开始 -->
+    <div class="slider-head">
+      <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)"
+                     auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
+        <ion-slide ng-repeat="list in vm.sliderList" style="height: 10rem">
+          <a ng-href="{{list.href}}" class="box"><img ng-src="{{list.src}}" style="width: 100%;height: 100%">
+            <h4 ng-bind="list.title" ng-show="false"
+                style="position: absolute;bottom: 0px;width: 100%;text-align: right;background-color: rgba(0,0,0,0.3);margin: 0px;padding: 10px">
+            </h4>
+          </a>
+        </ion-slide>
+      </ion-slide-box>
+      <!--<slider slider-list="vm.sliderList" slider-options="vm.sliderOptions">-->
+      <!--</slider>-->
+    </div>
+    <!-- 轮播模块结束 -->
+    <!-- 选项卡开始 -->
+    <ion-slide-box show-pager="false">
+      <!-- 选项卡各页开始 -->
+      <ion-slide>
+        <div class="box">
+          <div class="ion-nav row">
+            <li class="col col-25">
+              <!--<a href="../important-event/views/monthly.html" class="tab-item">-->
+                <a ng-click="goMonthy()" class="tab-item">
+                <i class="icon ion-ios-paper-outline royal-bg"></i> 月报
+              </a>
+            </li>
+            <li class="col col-25">
+              <a ui-sref="tab.knl({id: 0})" class="tab-item">
+                <i class="icon ion-eye energized-bg"></i> 知识浏览
+              </a>
+            </li>
+            <li class="col col-25">
+              <a href="../knl/question-create.html" class="tab-item">
+                <i class="icon ion-help positive-bg"></i> 快速问答
+              </a>
+            </li>
+            <li class="col col-25">
+              <a href="" class="tab-item">
+                <i class="icon ion-alert assertive-bg"></i> 重大事件
+              </a>
+            </li>
+            <li class="col col-25">
+              <a href="" class="tab-item" ng-click="test()">
+                <i class="icon ion-android-phone-portrait assertive-bg"></i> 监控数据
+              </a>
+            </li>
+            <!--<li class="col col-25">-->
+              <!--<a href="" class="tab-item">-->
+                <!--<i class="icon ion-android-phone-portrait assertive-bg"></i> 手机网管-->
+              <!--</a>-->
+            <!--</li>-->
+            <li class="col col-25">
+              <a href="" class="tab-item">
+                <i class="icon ion-clipboard energized-bg"></i> 专题分析
+              </a>
+            </li>
+            <li class="col col-25">
+              <a href="" class="tab-item">
+                <i class="icon ion-plus calm-bg"></i> 更多
+              </a>
+            </li>
+          </div>
+        </div>
+      </ion-slide>
+      <!-- 选项卡各页结束 -->
+      <!-- 选项卡第二页开始 -->
+      <ion-slide>
+        <div class="box">
+          <div class="ion-nav row">
+            <li class="col col-25">
+              <a href="" class="tab-item">
+                <i class="icon ion-plus calm-bg"></i> 其它
+              </a>
+            </li>
+          </div>
+        </div>
+      </ion-slide>
+      <!-- 选项卡第二页结束 -->
+    </ion-slide-box>
+    <!-- 选项卡结束 -->
+
+
+    <!-- 热门列表开始 -->
+    <div id="card-list" class="flex-vt">
+      <ul class="row nav-hot">
+        <!--<li class="col text-center" ng-class="{'active':vm.hotSlideIndex === 0}" on-touch="vm.hotSlideChange(0)">热门知识-->
+        <li class="col text-center" ng-class="{'active':vm.hotSlideIndex === 0}" on-touch="vm.hotSlideChange(0)">最新知识
+        </li>
+        <li class="col text-center" ng-class="{'active':vm.hotSlideIndex === 1}" on-touch="vm.hotSlideChange(1)">事件</li>
+        <li class="col text-center" ng-class="{'active':vm.hotSlideIndex === 2}" on-touch="vm.hotSlideChange(2)">工单</li>
+      </ul>
+      <ion-slide-box on-slide-changed="vm.hotSlideHasChanged($index)" delegate-handle="hotSlider" show-pager="false">
+        <ion-slide>
+          <div class="box">
+            <div class="hot-list">
+              <a class="list-item" ng-repeat="h in vm.hotKnlList|limitTo : vm.hotKnlListFilter"
+                  href="#browse/{{h.knlModule}}/{{h.knlID}}">
+                <div class="item item-divider">
+                  <h2> {{h.title}}</h2></div>
+              </a>
+
+              <div class="list-more" on-touch="vm.hotKnlListMore()">查看更多</div>
+            </div>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="hot-list">
+
+            <div class="list-more" style="padding:50px 0;">暂无内容</div>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="hot-list">
+            <div class="list-more" style="padding:50px 0;">暂无内容</div>
+          </div>
+        </ion-slide>
+      </ion-slide-box>
+    </div>
+    <!-- 热门列表结束 -->
+  </div>
+</ion-content>

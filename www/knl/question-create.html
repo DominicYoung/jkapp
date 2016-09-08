@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>提问</title>
+
+    <!-- compiled css output -->
+    <link href="../lib/ionic/css/ionic.app.css" rel="stylesheet">
+    <link href="css/create.css" rel="stylesheet">
+    <!-- ionic/angularjs js -->
+    <script src="../lib/ionic/js/ionic.bundle.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="../../cordova.js"></script>
+
+    <!-- your app's js -->
+
+    <script src="js/create/app.js"></script>
+    <script src="js/create/controller.js"></script>
+    <script src="js/create/controller.js"></script>
+    <script src="js/create/controller.js"></script>
+    <script src="../common/js/sensitive-word.js"></script>
+    <script type="text/javascript" src="js/config-sys.js"></script>
+    <script type="text/javascript" src="js/config-res.js"></script>
+</head>
+
+<body ng-app="createApp" ng-controller="createController">
+
+    <!--页头-->
+    <div class="bar bar-positive">
+        <div class="buttons">
+            <button class="button button-clear ion-chevron-left" ng-click="goBack()">&nbsp;返回</button>
+        </div>
+        <h1 class="title">提问</h1>
+    </div>
+
+    <ion-content class="ion-content">
+
+        <form name="createForm" class="question-create-form">
+            <textarea class="textarea" placeholder="为你的问题添加一个恰当的标题..." autofocus="autofocus" rows="3" ng-model="knl.title" has-sensitive required></textarea>
+
+            <textarea class="textarea" name="content" placeholder="清晰描述你的问题，更容易获得答案..." rows="8" ng-model="knl.content" has-sensitive required ng-invalid="aa"></textarea>
+            <ul class="list">
+                <label class="item item-input">
+                    <span class="input-label">关键词:</span>
+                    <input type="text" placeholder="多个关键词以“逗号”隔开..." has-sensitive ng-model="knl.tag" required>
+                </label>
+                <li class="item">
+                        <h3 class="qw-item-ion-rt" on-touch="typeShowFn('knlTypes')">
+                            知识类型 
+                            <i ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[typeShow.knlTypes]" class="ion"></i>
+                            <span ng-repeat="knlTypeObj in types.knlTypes | filter:knl.knlType:true">{{knlTypeObj.name}}</span>
+                        </h3>
+                        <label ng-show="typeShow.knlTypes" class="item-radio" ng-repeat="item in types.knlTypes">
+                            <input type="radio" name="knlTypes" ng-value="item.ID" ng-model="knl.knlType" ng-change="typeShowFn('knlTypes')">
+                            <div class="item-content qw-check">
+                                {{item.name}}
+                            </div>
+                        </label>
+                </li>
+                <li class="item">
+                        <h3 class="qw-item-ion-rt" on-touch="typeShowFn('knlSources')">
+                            知识来源 
+                            <i ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[typeShow.knlSources]" class="ion"></i>
+                            <span ng-repeat="knlSourceObj in types.knlSources | filter:knl.knlSource:true">{{knlSourceObj.name}}</span>
+                        </h3>
+                        <label ng-show="typeShow.knlSources" class="item-radio" ng-repeat="item in types.knlSources">
+                            <input type="radio" name="knlSources" ng-value="item.ID" ng-model="knl.knlSource" ng-change="typeShowFn('knlSources')">
+                            <div class="item-content qw-check">
+                                {{item.name}}
+                            </div>
+                        </label>
+                </li>
+                <li class="item">
+                     <h3 class="qw-item-ion-rt" on-touch="typeShowFn('sysTypes')">
+                        所属系统
+                        <i ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[typeShow.sysTypes]" class="ion">
+                        </i>
+                        <span ng-repeat="sysTypeList in types.sysTypes | filter:knl.knlSysType:true">
+                            <span ng-repeat="sysTypeObj in sysTypeList.child | filter:knl.knlSysType:true">{{sysTypeObj.name}}</span>
+                        </span>
+                    </h3>
+                    <ul ng-show="typeShow.sysTypes" class="nav nav-pills nav-level-2">
+                        <li ng-repeat="group in types.sysTypes">
+                            <h4>{{group.name}}</h4>
+                            <label class="item-radio" ng-repeat="item in group.child">
+                                <input type="radio" ng-value="item.ID" name="sysTypes" ng-model="knl.knlSysType" ng-change="typeShowFn('sysTypes')">
+                                <div class="item-content qw-check">
+                                    {{item.name}}
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item">
+                     <h3 class="qw-item-ion-rt" on-touch="typeShowFn('resTypes')">
+                        资源类型
+                        <i ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[typeShow.resTypes]" class="ion"></i>
+                        <span ng-repeat="resTypeList in types.resTypes | filter:knl.knlResourceType:true">
+                            <span ng-repeat="resTypeObj in resTypeList.child | filter:knl.knlResourceType:true">{{resTypeObj.name}}</span>
+                        </span>
+                    </h3>
+                    <ul ng-show="typeShow.resTypes" class="nav nav-pills nav-level-2">
+                        <li ng-repeat="group in types.resTypes">
+                            <h4>{{group.name}}</h4>
+                            <label class="item-radio" ng-repeat="item in group.child">
+                                <input type="radio" ng-value="item.ID" name="resTypes" ng-model="knl.knlResourceType" ng-change="typeShowFn('resTypes')">
+                                <div class="item-content qw-check">
+                                    {{item.name}}
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <button class="button button-block button-small button-balanced" ng-disabled="createForm.$invalid" on-touch="submitFn()">
+                发布到全网
+            </button>
+        </form>
+
+
+    </ion-content>
+</body>
+
+</html>

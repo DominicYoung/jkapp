@@ -1,0 +1,26 @@
+<ion-view>
+    <div class="bar bar-header bar-dark">
+        
+            <button class="button button-icon icon ion-ios-arrow-thin-left " ng-click="closeModal1()" ></button>
+        
+        <h1 class="title">更改{{status[inputStatus]}}</h1>
+        
+           <button class="button button-large button-balanced" type="submit" ng-click="changeOther(inputStatus)">保存</button>
+       
+    </div>
+
+    <ion-content class="has-header  padding">
+               
+    <input type="text"  style="
+              border-right: #9a9999 0px solid; 
+              border-top:  #9a9999 0px solid; 
+              border-left: #9a9999 0px solid; 
+              width:800px; 
+
+              border-bottom: #9a9999 2px  solid;
+              border-bottom-color: green"   
+              ng-bind="userInfo[inputStatus]" value="{{userInfo[inputStatus]}}">
+
+              
+    </ion-content>
+</ion-view>

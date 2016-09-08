@@ -1,0 +1,654 @@
+<ion-view hide-tabs="true">
+  <ion-header-bar class="bar bar-header bar-positive">
+    <button class="button button-clear ion-chevron-left" ng-click="goBack()"></button>
+    <h1 class="title"><span ng-bind="userInfo.provName"></span>
+    <span ionic-datepicker input-obj="datepickerObject"
+          ng-bind="datepickerObject.inputDate | date:datepickerObject.dateFormat"></span>
+    </h1>
+  </ion-header-bar>
+  <ion-content class="scroll-content">
+    <section id="overall-situation">
+      <div ng-model='importantEvent'>
+        <div ng-show="importantEvent.length!=0">
+          <p class="text important-title "><span ng-bind="month | toYear"></span>发生重大事件 <span
+            ng-bind="importantEvents"></span>起</p>
+
+          <div class="hot-list">
+            <a class="list-item" ng-repeat="x in topDescription|limitTo : vm.hotListFilter">
+              <h3 class="top-description" ng-bind="x"></h3>
+            </a>
+
+            <div class="list-more" on-touch="vm.hotListMore()" ng-show="importantEvents>vm.hotListFilter">查看更多</div>
+          </div>
+        </div>
+        <div ng-show="importantEvent.length==0">
+          <p class="text important-title ">&nbsp;&nbsp;&nbsp;&nbsp<span ng-bind="month | toYear"></span>支撑系统运行稳定，CRM系统业务受理、BOSS系统计费账务处理、各渠道服务的可用性，底层关键主机和数据库运行都保持了较好的运营状态。期间发生未发生重大事件</p>
+        </div>
+      </div>
+    </section>
+    <section id="bearer-business">
+      <p class="section-bar" sub-show><span class="section-title left">业务承载情况</span></p>
+
+      <div class="section-content" id="bearer-business-content">
+        <div name="operate-sys">
+          <p class="sub-section-bar">
+            <span class="section-title left">营业系统</span>
+            <span class="section-more right more" ng-click="openModal(1,1)">more</span>
+          </p>
+
+          <div id="operate-sys">
+            <p class="description">
+              实体营业厅受理业务总量（前台) <span ng-bind="vm.description.businessPhyCur"></span>万笔,环比<span
+              ng-bind="vm.description.businessPhyAdd"></span><span
+              ng-bind="vm.description.businessPhyDval"></span>%；日均受理<span
+              ng-bind="vm.description.businessPhyDayCur"></span>万笔。电子渠道受理业务总量<span
+              ng-bind="vm.description.businessEleCur"></span>万笔,环比<span
+              ng-bind="vm.description.businessEleAdd"></span><span ng-bind="vm.description.businessEleDval"></span>%，日平均业务受理量<span
+              ng-bind="vm.description.businessEleDayCur"></span>万笔，占营业系统受理业务总量的<span
+              ng-bind="vm.description.businessEleScale"></span>%。
+            </p>
+
+            <div id="operate-piecharts" class="e_charts_pie"></div>
+            <hr style="width: 90%;margin-bottom: 0px"/>
+            <div id="operate-stickcharts" class="e_charts"></div>
+          </div>
+          <p class="sub-section-bar">
+            <span class="section-title left">计费系统</span>
+            <span class="section-more right more" ng-click="openModal(1,2)">more</span>
+          </p>
+
+          <div id="billing-sys">
+            <p class="description">
+              计费系统共处理原始话单量<span ng-bind="vm.description.billCur02"></span>亿条,环比<span
+              ng-bind="vm.description.bill02Add"></span><span ng-bind="vm.description.bill02Dval"></span>%，其中计费话单量<span
+              ng-bind="vm.description.billCur014"></span>亿条，计费话单量占比<span ng-bind="vm.description.billCur014Scale"></span>%。计费话单中，GPRS业务<span
+              ng-bind="vm.description.billCur01404"></span>亿条,环比<span ng-bind="vm.description.bill01404Add"></span><span
+              ng-bind="vm.description.bill01401Dval"></span>%，占计费总话单量的<span
+              ng-bind="vm.description.billCur01404Scale"></span>%；语音业务<span ng-bind="vm.description.billCur01401"></span>亿条,环比<span
+              ng-bind="vm.description.bill01401Add"></span><span
+              ng-bind="vm.description.bill01404Dval"></span>%，占计费总话单量的<span
+              ng-bind="vm.description.billCur01401Scale"></span>%；短信业务<span ng-bind="vm.description.billCur01405"></span>亿条,环比<span
+              ng-bind="vm.description.bill01405Add"></span><span
+              ng-bind="vm.description.bill01405Dval"></span>%，占计费总话单量的<span
+              ng-bind="vm.description.billCur01405Scale"></span>%。
+            </p>
+
+            <div id="billing-piecharts" class="e_charts_pie"></div>
+            <hr style="width: 90%;margin-bottom: 0px"/>
+            <div id="billing-stickcharts1" class="e_charts"></div>
+            <hr style="width: 90%;margin-bottom: 0px"/>
+            <div id="billing-stickcharts2" class="e_charts"></div>
+          </div>
+          <p class="sub-section-bar">
+            <span class="section-title left">账务系统</span>
+            <span class="section-more right more" ng-click="openModal(1,3)">more</span>
+          </p>
+
+          <div id="finaniel-sys">
+            <p class="description">
+              BOSS系统用户数<span ng-bind="vm.description.financialCur02a"></span>亿,环比<span
+              ng-bind="vm.description.financial02aAdd"></span>%；BOSS系统账单用户数<span
+              ng-bind="vm.description.financialCur02c"></span>亿,环比<span ng-bind="vm.description.financial02cAdd"></span>%，占BOSS系统用户数的<span
+              ng-bind="vm.description.financialCur02cScale"></span>% 。系统处理的HLR工单总量<span
+              ng-bind="vm.description.financialCur001"></span>亿笔,环比<span ng-bind="vm.description.financial001Add"></span>%。其中停开机工单量占比为<span
+              ng-bind="vm.description.financialCur007Scale"></span>%，开机工单与停机工单量比值为<span
+              ng-bind="vm.description.financialCurScale"></span>。
+            </p>
+
+            <div id="finaniel-piecharts" class="e_charts_pie"></div>
+            <hr style="width: 90%;margin-bottom: 0px"/>
+            <div id="finaniel-stickcharts" class="e_charts"></div>
+            <hr style="width: 90%;margin-bottom: 0px"/>
+            <div id="finaniel2-piecharts" class="e_charts_pie"></div>
+            <hr style="width: 90%;margin-bottom: 0px"/>
+            <div id="finaniel2-stickcharts" class="e_charts"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="interrupt-business">
+      <p class="section-bar" sub-show show-call-back="monthyDataService.func(data)"><span class="section-title left">业务中断情况</span>
+      </p>
+
+      <div id="interrupt-business-content" class="section-content">
+        <div name="operate-sys">
+
+          <p class="sub-section-bar">
+            计划外中断
+            <span class="section-more right more" ng-click="openModal(1,33)">more</span>
+          </p>
+
+          <p class="description">
+            计划外中断<span ng-bind="vm.description.pieOutTimes"></span>次<span ng-show="monthyDataService.intteruptOutShow">，计划外中断时长共<span
+            ng-bind="vm.description.pieOutTime"></span>分钟，其中<span ng-bind="vm.description.pieOutGrade"></span></span>。
+          </p>
+          <div ng-show="monthyDataService.intteruptOutShow">
+            <p class="sub-section-bar">
+              <span class="section-title left">中断等级按次数统计</span>
+            </p>
+
+            <div>
+              <div id="interlevel-piecharts" class="e_charts_pie"></div>
+              <hr style="width: 90%;margin-bottom: 0px"/>
+              <div id="interlevel-stickcharts" class="e_charts"></div>
+            </div>
+            <p class="sub-section-bar">
+              <span class="section-title left">中断原因按次数统计</span>
+            </p>
+
+            <div>
+              <div id="intercause-piecharts" class="e_charts_pie"></div>
+              <hr style="width: 90%;margin-bottom: 0px"/>
+              <div id="intercause-stickcharts" class="e_charts"></div>
+            </div>
+            <p class="sub-section-bar">
+              <span class="section-title left">中断渠道按时长统计</span>
+            </p>
+
+            <div class="charts_content">
+              <div id="intertime-piecharts" class="e_charts_pie"></div>
+              <hr style="width: 90%;margin-bottom: 0px"/>
+              <div id="intertime-stickcharts" class="e_charts"></div>
+            </div>
+          </div>
+          <p class="sub-section-bar">
+            计划内中断
+            <span class="section-more right more" ng-click="openModal(1,32)">more</span>
+          </p>
+
+          <p class="description">
+            计划内中断<span ng-bind="vm.description.pieInTimes"></span>次，主要原因为<span
+            ng-bind="vm.description.pieInReason"></span>。计划内中断时长共<span
+            ng-bind="vm.description.pieInTime"></span>分钟，其中<span ng-bind="vm.description.pieInMaxTime"></span>计划内中断时长最长。
+          </p>
+
+          <p class="sub-section-bar">
+            <span class="section-title left">中断内原因按次数统计</span>
+          </p>
+
+          <div>
+            <div id="interincause-piecharts" class="e_charts_pie"></div>
+            <hr style="width: 90%;margin-bottom: 0px"/>
+            <div id="interincause-stickcharts" class="e_charts"></div>
+          </div>
+          <p class="sub-section-bar">
+            <span class="section-title left">中断内渠道按时长统计</span>
+          </p>
+
+          <div class="charts_content">
+            <div id="interinchannel-piecharts" class="e_charts_pie"></div>
+            <hr style="width: 90%;margin-bottom: 0px"/>
+            <div id="interinchannel-stickcharts" class="e_charts"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="client-sense">
+      <p class="section-bar" sub-show><span class="section-title left">客户感知探测</span></p>
+
+      <div id="client-sense-content" class="section-content">
+        <!--<ul class="nav nav-tabs">-->
+        <!--<li id="btn_usability" class="active" ng-click="clientSenseChange(1)">-->
+        <!--<a data-toggle="tab">可用性</a>-->
+        <!--</li>-->
+        <!--<li id="btn_capability" ng-click="clientSenseChange(2)">-->
+        <!--<a data-toggle="tab">响应时长</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <div class="row">
+          <a class="button {{clientFirstClass}} col col-50" ng-click="clientSenseChange(1)">可用性</a>
+          <a class="button {{clientSecondClass}} col col-50" ng-click="clientSenseChange(2)">响应时长</a>
+        </div>
+        <section id="usability" ng-show="clientShow">
+          <p class="sub-section-bar">
+            <span class="section-title left">全部查询类关键业务可用性<span class="section-more right more" ng-click="openModal(1,9)">more</span></span>
+          </p>
+
+          <div>
+            <div id="essentialbussiness-stickcharts" class="e_charts"></div>
+          </div>
+          <div class="row">
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">话费查询可用性<span class="section-half right more"
+                                                            ng-click="openModal(1,12)">more</span></span>
+              </p>
+
+              <div>
+                <div id="pricequery-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">账单查询可用性<span class="section-half right more"
+                                                            ng-click="openModal(1,13)">more</span></span>
+              </p>
+
+              <div>
+                <div id="billquery-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">详单查询可用性<span class="section-half right more"
+                                                            ng-click="openModal(1,14)">more</span></span>
+              </p>
+
+              <div>
+                <div id="detailquery-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">资料查询可用性<span class="section-half right more"
+                                                            ng-click="openModal(1,10)">more</span></span>
+              </p>
+
+              <div>
+                <div id="materialquery-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">缴费业务可用性<span class="section-half right more"
+                                                            ng-click="openModal(1,15)">more</span></span>
+              </p>
+
+              <div>
+                <div id="payment-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">资料变更可用性<span class="section-half right more"
+                                                            ng-click="openModal(1,11)">more</span></span>
+              </p>
+
+              <div>
+                <div id="materialchange-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="capbility" ng-show="!clientShow">
+          <div class="row">
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">话费查询响应时长<span class="section-half right more"
+                                                             ng-click="openModal(1,38)">more</span></span>
+              </p>
+
+              <div>
+                <div id="t_pricequery-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">账单查询响应时长<span class="section-half right more"
+                                                             ng-click="openModal(1,39)">more</span></span>
+              </p>
+
+              <div>
+                <div id="t_billquery-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">详单查询响应时长<span class="section-half right more"
+                                                             ng-click="openModal(1,40)">more</span></span>
+              </p>
+
+              <div>
+                <div id="t_detailquery-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">资料查询响应时长<span class="section-half right more"
+                                                             ng-click="openModal(1,36)">more</span></span>
+              </p>
+
+              <div>
+                <div id="t_materialquery-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">缴费业务响应时长<span class="section-half right more"
+                                                             ng-click="openModal(1,41)">more</span></span>
+              </p>
+
+              <div>
+                <div id="t_payment-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+            <div class="col col-50">
+              <p class="sub-section-bar">
+              <span class="section-title left">资料变更响应时长<span class="section-half right more"
+                                                             ng-click="openModal(1,37)">more</span></span>
+              </p>
+
+              <div>
+                <div id="t_materialchange-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+    <section id="business-operate">
+      <p class="section-bar" sub-show><span class="section-title left">业务运营指标</span></p>
+
+      <div id="business-operate-content" class="section-content">
+        <div class="row">
+          <div class="col col-50">
+            <p class="sub-section-bar">
+            <span class="section-title left">5 分钟缴费开机及时率<span class="section-half right more"
+                                                              ng-click="openModal(1,16)">more</span></span>
+            </p>
+
+            <div>
+              <div id="5minute-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+          <div class="col col-50">
+            <p class="sub-section-bar">
+            <span class="section-title left">10 分钟缴费开机延迟率<span class="section-half right more"
+                                                               ng-click="openModal(1,17)">more</span></span>
+            </p>
+
+            <div>
+              <div id="10minute-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-50">
+            <p class="sub-section-bar">
+            <span class="section-title left">欠费停机前短信提醒成功率<span class="section-half right more"
+                                                               ng-click="openModal(1,18)">more</span></span>
+            </p>
+
+            <div>
+              <div id="qianfei-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+          <div class="col col-50">
+            <p class="sub-section-bar">
+            <span class="section-title left">GPRS流量用尽提醒成功率<span class="section-half right more"
+                                                                ng-click="openModal(1,19)">more</span></span>
+            </p>
+
+            <div>
+              <div id="gprs-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-50">
+            <p class="sub-section-bar">
+            <span class="section-title left">话费回馈到账提醒成功率<span class="section-half right more"
+                                                              ng-click="openModal(1,20)">more</span></span>
+            </p>
+
+            <div>
+              <div id="daozhang-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+          <div class="col col-50">
+            <p class="sub-section-bar">
+            <span class="section-title left">充  值  业  务  成  功  率<span class="section-half right more"
+                                                                      ng-click="openModal(1,21)">more</span></span>
+            </p>
+
+            <div>
+              <div id="remind-pay-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-50">
+            <p class="sub-section-bar">
+              <span class="section-title left">银行业务成功率<span class="section-half right more" ng-click="openModal(1,22)">more</span></span>
+            </p>
+
+            <div>
+              <div id="remind-bank-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+          <div class="col col-50">
+            <p class="sub-section-bar">
+              <span class="section-title left">HLR业务成功率<span class="section-half right more" ng-click="openModal(1,23)">more</span></span>
+            </p>
+
+            <div>
+              <div id="remind-hlr-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-50">
+            <p class="sub-section-bar">
+              <span class="section-title left">客服业务成功率<span class="section-half right more" ng-click="openModal(1,24)">more</span></span>
+            </p>
+
+            <div>
+              <div id="remind-kefu-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+          <div class="col col-50">
+            <p class="sub-section-bar">
+              <span class="section-title left">短厅业务成功率<span class="section-half right more" ng-click="openModal(1,25)">more</span></span>
+            </p>
+
+            <div>
+              <div id="remind-msn-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-50">
+            <p class="sub-section-bar">
+              <span class="section-title left">网厅业务成功率<span class="section-half right more" ng-click="openModal(1,26)">more</span></span>
+            </p>
+
+            <div>
+              <div id="remind-online-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="sub-section-bar" ng-show="false">
+            <span class="section-title left">话单计费处理平均时长</span>
+            <span class="section-more right more" ng-click="openModal(1,27)">more</span>
+          </p>
+
+          <div id="dealtime-huafei-stickcharts" class="e_charts" ng-show="false"></div>
+
+          <div class="row">
+            <div class="col col-50">
+              <p class="sub-section-bar">
+                <span class="section-title left">日常开机工单处理时长<span class="section-half right more" ng-click="openModal(1,28)">more</span></span>
+              </p>
+              <div>
+                <div id="dealtime-kaiji-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+            <div class="col col-50">
+              <p class="sub-section-bar">
+                <span class="section-title left">日常停机工单处理时长<span class="section-half right more" ng-click="openModal(1,29)">more</span></span>
+              </p>
+              <div>
+                <div id="dealtime-tingji-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-50">
+              <p class="sub-section-bar">
+                <span class="section-title left">业务高峰期开机工单处理时长<span class="section-half right more" ng-click="openModal(1,30)">more</span></span>
+              </p>
+              <div>
+                <div id="dealtime-gfkaiji-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+            <div class="col col-50">
+              <p class="sub-section-bar">
+                <span class="section-title left">业务高峰期停机工单处理时长<span class="section-half right more" ng-click="openModal(1,31)">more</span></span>
+              </p>
+              <div>
+                <div id="dealtime-gftingji-stickcharts" class="e_charts_50"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="system-operate">
+      <p class="section-bar" sub-show><span class="section-title left">系统运营指标</span></p>
+
+      <div id="system-operate-content" class="section-content">
+        <div class="row">
+          <div class="col col-50">
+            <p class="sub-section-bar">
+            <span class="section-title left">主机可用性<span class="section-half right more"
+                                                        ng-click="openModal(1,7)">more</span></span>
+            </p>
+
+            <div>
+              <div id="hostcapability-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+          <div class="col col-50">
+            <p class="sub-section-bar">
+            <span class="section-title left">数据库可用性<span class="section-half right more"
+                                                         ng-click="openModal(1,8)">more</span></span>
+            </p>
+
+            <div>
+              <div id="dbcapability-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="customer-complaint">
+      <p class="section-bar" sub-show><span class="section-title left">客户投诉情况</span></p>
+
+      <div id="customer-complaint-content" class="section-content">
+        <div class="row">
+          <div class="col col-50">
+            <p class="sub-section-bar">
+              <span class="section-title left">业务支撑网投诉量<span class="section-half right more" ng-click="openModal(1,4)">more</span></span>
+            </p>
+
+            <div>
+              <div id="businesscomplaint-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+          <div class="col col-50">
+            <p class="sub-section-bar">
+              <span class="section-title left">万用户投诉率</span>
+            </p>
+
+            <div>
+              <div id="complaintpercent-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-show="false">
+          <div class="col col-50">
+            <p class="sub-section-bar">
+            <span class="section-title left">客户投诉解决平均时长<span class="section-half right more"
+                                                             ng-click="openModal(1,34)">more</span></span>
+            </p>
+
+            <div>
+              <div id="complaintdeal-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+          <div class="col col-50">
+            <p class="sub-section-bar">
+            <span class="section-title left">客户投诉回复及时率<span class="section-half right more"
+                                                            ng-click="openModal(1,35)">more</span></span>
+            </p>
+
+            <div>
+              <div id="complaintrecall-stickcharts" class="e_charts_50"></div>
+            </div>
+          </div>
+        </div>
+        <p class="sub-section-bar">
+          <span class="section-title left">主要焦点投诉</span>
+          <span class="section-more right more" ng-click="openModal(1,5)">more</span>
+        </p>
+
+        <div id="pointcomplaint-piecharts" class="e_charts"></div>
+
+        <p class="sub-section-bar">
+          <span class="section-title left">主要责任原因</span>
+          <span class="section-more right more" ng-click="openModal(1,6)">more</span>
+        </p>
+
+        <div id="mainreason-piecharts" class="e_charts"></div>
+      </div>
+    </section>
+
+    <section id="point-complaint">
+      <p class="section-bar" sub-show><span class="section-title left">焦点投诉情况</span></p>
+      <div id="point-complaint-content" class="section-content">
+      <p class="sub-section-bar">
+            <span class="section-title left">费用类投诉</span>
+            <span class="section-more right more" ng-click="goDetail(40,month,pointChargeComplait.complaitSum)">more</span>
+      </p>
+        <p class="description">
+          <span> {{month | toYear}}费用类投诉共{{pointChargeComplait.complaitSum}}件, 占{{month | toMonth}}投诉总量的{{pointChargeComplait.pointComplaitSum}}, 环比{{pointChargeComplait.chainRatio}}, 同比{{pointChargeComplait.lastYearRatio}}。</span>
+        </p>
+        <div id="complaint-pointbymonth-stickcharts" class="e_charts"></div>
+        <hr style="width: 90%;margin-bottom: 0px"/>
+        <div id="complaint-pointdistribution-piecharts" class="e_charts"></div>
+        <hr style="width: 90%;margin-bottom: 0px"/>
+        <div id="complaint-pointdistributionbyreason-piecharts" class="e_charts"></div>
+
+        <p class="sub-section-bar">
+            <span class="section-title left">4G投诉投诉</span>
+            <span class="section-more right more" ng-click="goDetail(41,month,point4GComplait.complaitSum)">more</span>
+        </p>
+        <p class="description">
+          <span> {{month | toYear}}4G投诉共{{point4GComplait.complaitSum}}件, 占{{month | toMonth}}投诉总量的{{point4GComplait.pointComplaitSum}}, 环比{{point4GComplait.chainRatio}}, 同比{{point4GComplait.lastYearRatio}}。</span>
+        </p>
+        <div id="complaint-4Gbymonth-stickcharts" class="e_charts"></div>
+        <hr style="width: 90%;margin-bottom: 0px"/>
+        <div id="complaint-4Gdistribution-piecharts" class="e_charts"></div>
+        <hr style="width: 90%;margin-bottom: 0px"/>
+        <div id="complaint-4Gdistributionbyreason-piecharts" class="e_charts"></div>
+
+        <p class="sub-section-bar">
+            <span class="section-title left">流量业务投诉</span>
+            <span class="section-more right more" ng-click="goDetail(42,month,pointGprsComplait.complaitSum)">more</span>
+        </p>
+        <p class="description">
+          <span> {{month | toYear}}4G投诉共{{pointGprsComplait.complaitSum}}件, 占{{month | toMonth}}投诉总量的{{pointGprsComplait.pointComplaitSum}}, 环比{{pointGprsComplait.chainRatio}}, 同比{{pointGprsComplait.lastYearRatio}}。</span>
+        </p>
+        <div id="complaint-GPRSbymonth-stickcharts" class="e_charts"></div>
+        <hr style="width: 90%;margin-bottom: 0px"/>
+        <div id="complaint-GPRSdistribution-piecharts" class="e_charts"></div>
+        <hr style="width: 90%;margin-bottom: 0px"/>
+        <div id="complaint-GPRSdistributionbyreason-piecharts" class="e_charts"></div>
+      </div>
+    </section>
+  </ion-content>
+</ion-view>

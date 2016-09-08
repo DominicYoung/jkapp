@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>协查单</title>
+        <!-- compiled css output -->
+        <link href="../lib/ionic/css/ionic.app.css" rel="stylesheet">
+        <!-- <link href="../common/css/.css" rel="stylesheet"> -->
+        <!-- <link href="css/user.css" rel="stylesheet"> -->
+        <link href="css/search.css" rel="stylesheet">
+        <link href="../common/css/calender.css" rel="stylesheet">
+        <!-- ionic/angularjs js
+        <script src="lib/angular-cookies/angular-cookies.js"></script>-->
+        <script src="../lib/ionic/js/ionic.bundle.js"></script>
+        <script src="../lib/ngCordova/dist/ng-cordova.js"></script>
+        <script src="../common/js/common-directive.js"></script>
+        <script src="../common/js/calender.js"></script>
+        <script src="js/search-app.js"></script>
+        <script src="js/search-service.js"></script>
+        <script src="js/search-controller.js"></script>
+    </head>
+    <body ng-app="investApp"  ng-controller="ctrl.invest" class="scroll-content">
+        <ion-side-menus>
+        <!-- Center content -->
+        <ion-side-menu-content>
+        <header class="bar bar-header bar-positive">
+            <a class="button button-clear icon ion-ios-undo" previous-page></a>
+            <h1 class="title">协查单列表</h1>
+            <a menu-toggle="right" class="button button-clear">筛选</a>
+        </header>
+        <div class="bar button-subheader">
+            <button class="in-item button-gray active">开始时间</button>
+            <button class="in-item button-gray">2016-01-09</button>
+            <button class="in-item button-gray">状态</button>
+            <button class="in-item button-gray">来源</button>
+        </div>
+        <div class="choice-nav">
+            <div class="row row-wrap">
+                <nav class="col col-50">col-50</nav>
+                <nav class="col col-50">col-50</nav>
+                <nav class="col col-50">col-50</nav>
+            </div>
+        </div>
+        <ion-content delegate-handle="knlsScroll" class="content has-header">
+            <ion-refresher pulling-text="下拉刷新..." on-refresh="vm.doRefresh()">
+        </ion-refresher>
+        <div class="list card" ng-repeat="r in vm.knlList.rows">
+            <div class="item item-divider">{{r.title}}</div>
+            <a class="item item-body" ng-href="browse.html#/{{r.knlID}}" ng-bind="r.content"></a>
+        </div>
+        <div class="span-ct" ng-if="!vm.moreData.CanBeLoaded">{{vm.moreData.loadedRemind}}</div>
+        <ion-infinite-scroll ng-if="vm.moreDataCanBeLoaded()" on-infinite="vm.doMore()" distance="1%">
+        </ion-infinite-scroll>
+        </ion-content>
+        </ion-side-menu-content>
+        <!-- Right menu -->
+        <ion-side-menu side="right">
+        <header class="bar bar-header">
+            <h1 class="title">查询条件</h1>
+        </header>
+        <section class="content has-header">
+            <div class="list">
+                <calender>
+                <label class="item item-input">
+                    <span class="input-label">开始日期</span>
+                    <input type="text" name="startDate" ng-model="vm.search.releaseStartDate">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">结束日期</span>
+                    <input type="text" name="endDate" ng-model="vm.search.releaseEndDate">
+                </label>
+                </calender>
+                <label class="item item-input">
+                    <input type="radio" name="state" ng-model="vm.search.state" ng-value="'0'">关闭
+                    <input type="radio" name="state" ng-model="vm.search.state" ng-value="'1'">已解决
+                    <input type="radio" name="state" ng-model="vm.search.state" ng-value="'2'">一线
+                </label>
+                <div class="item">
+                    <h3 class="qw-item-ion-rt" on-touch="vm.showFn('source')">
+                    事件来源
+                    <i ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[vm.show.source]" class="ion"></i>
+                    <span>{{vm.search.source}}</span>
+                    </h3>
+                    <label ng-show="vm.show.source" class="item-radio" ng-repeat="item in vm.sourceList">
+                        <input type="radio" name="provKey" ng-value="item" ng-model="vm.search.source" ng-change="vm.showFn('source')">
+                        <div class="item-content qw-check">
+                            {{item}}
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <button class="button button-clear button-positive" on-touch="vm.getSearchList()">查询</button>
+            <button class="button button-clear button-assertive pull-right" on-touch="vm.clearSearchFn()">重置</button>
+        </section>
+        </ion-side-menu>
+        </ion-side-menus>
+    </body>
+</html>

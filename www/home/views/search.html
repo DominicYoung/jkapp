@@ -1,0 +1,125 @@
+<div id="qw-search">
+    <div class="bar bar-header has-tabs-top item-input-inset bar-positive">
+        <h1 class="title">查询</h1>
+        <button class="button button-clear" on-touch="vm.closeSearchModal()">
+        <i class="icon ion-close-circled"></i>
+        </button>
+    </div>
+    <ul class="list">
+        <li class="item">
+            <label class="item-radio">
+                <input type="checkbox" name="fulltext" ng-model="vm.search.fullText" >
+                <div class="item-content qw-check">
+                    全文检索
+                </div>
+            </label>
+        </li>
+        <li class="item">
+            <label class="item-input">
+                <span class="input-label">查询内容</span>
+                <input type="text" name="title" ng-model="vm.search.title">
+            </label>
+        </li>
+        <li class="item">
+            <label class="item-input">
+                <span class="input-label">创建人</span>
+                <input type="text" name="fullname" ng-model="vm.search.fullname">
+            </label>
+        </li>
+        <calender>
+        <li class="item">
+            <label class="item-input">
+                <span class="input-label">开始时间</span>
+                <input type="text" class="ng-pristine ng-valid ng-touched" name="startDate" ng-model="vm.search.releaseStartDate">
+            </label>
+        </li>
+        <li class="item">
+            <label class="item-input">
+                <span class="input-label">结束时间</span>
+                <input type="text" name="endDate" ng-model="vm.search.releaseEndDate">
+            </label>
+        </li>
+        </calender>
+        <li class="item">
+            <h3 class="qw-item-ion-rt" on-touch="vm.showFn('provinces')">
+            省份
+            <i ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[vm.show.provinces]" class="ion"></i>
+            <span ng-repeat="provObj in vm.searchList.provinces | filter:vm.search.provKey:true">{{provObj.name}}</span>
+            </h3>
+            <label ng-show="vm.show.provinces" class="item-radio" ng-repeat="item in vm.searchList.provinces">
+                <input type="radio" name="provKey" ng-value="item.ID" ng-model="vm.search.provKey" ng-change="vm.showFn('provinces')">
+                <div class="item-content qw-check">
+                    {{item.name}}
+                </div>
+            </label>
+        </li>
+        <li class="item">
+            <h3 class="qw-item-ion-rt" on-touch="vm.showFn('knlTypes')">
+            知识类型
+            <i ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[vm.show.knlTypes]" class="ion"></i>
+            <span ng-repeat="knlTypeObj in vm.searchList.knlTypes | filter:vm.search.knlType:true">{{knlTypeObj.name}}</span>
+            </h3>
+            <label ng-show="vm.show.knlTypes" class="item-radio" ng-repeat="item in vm.searchList.knlTypes">
+                <input type="radio" name="knlType" ng-value="item.ID" ng-model="vm.search.knlType" ng-change="vm.showFn('knlTypes')">
+                <div class="item-content qw-check">
+                    {{item.name}}
+                </div>
+            </label>
+        </li>
+        <li class="item">
+            <h3 class="qw-item-ion-rt" on-touch="vm.showFn('sysTypes')">
+            所属系统
+            <i ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[vm.show.sysTypes]" class="ion"></i>
+            <span ng-repeat="sysTypeList in vm.searchList.sysTypes | filter:vm.search.knlSysType:true"><span ng-show="sysTypeList.ID === vm.search.knlSysType">{{sysTypeList.name}}</span>
+            <span ng-repeat="sysTypeObj in sysTypeList.child | filter:vm.search.knlSysType:true">{{sysTypeObj.name}}</span>
+            </span>
+            </h3>
+            <ul ng-show="vm.show.sysTypes" class="nav nav-pills nav-level-2">
+                <li ng-repeat="group in vm.searchList.sysTypes">
+                    <h4>
+                    <label class="item-radio">
+                        <input type="radio" ng-value="group.ID" name="sysTypes" ng-model="vm.search.knlSysType" ng-change="vm.showFn('sysTypes')">
+                        <div class="item-content qw-check">
+                            {{group.name}}
+                        </div>
+                    </label></h4>
+                    <label class="item-radio" ng-repeat="item in group.child">
+                        <input type="radio" ng-value="item.ID" name="sysTypes" ng-model="vm.search.knlSysType" ng-change="vm.showFn('sysTypes')">
+                        <div class="item-content qw-check">
+                            {{item.name}}
+                        </div>
+                    </label>
+                </li>
+            </ul>
+        </li>
+        <li class="item">
+            <h3 class="qw-item-ion-rt" on-touch="vm.showFn('resTypes')">
+            资源类型
+            <i ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[vm.show.resTypes]" class="ion"></i>
+            <span ng-repeat="resTypeList in vm.searchList.resTypes | filter:vm.search.knlResourceType:true"><span ng-show="resTypeList.ID === vm.search.knlResourceType">{{resTypeList.name}}</span>
+            <span ng-repeat="resTypeObj in resTypeList.child | filter:vm.search.knlResourceType:true">{{resTypeObj.name}}</span>
+            </span>
+            </h3>
+            <ul ng-show="vm.show.resTypes" class="nav nav-pills nav-level-2">
+                <li ng-repeat="group in vm.searchList.resTypes">
+                    <h4>
+                    <label class="item-radio">
+                        <input type="radio" ng-value="group.ID" name="resTypes" ng-model="vm.search.knlResourceType" ng-change="vm.showFn('resTypes')">
+                        <div class="item-content qw-check">
+                            {{group.name}}
+                        </div>
+                    </label>
+                    </h4>
+                    <label class="item-radio" ng-repeat="item in group.child">
+                        <input type="radio" ng-value="item.ID" name="resTypes" ng-model="vm.search.knlResourceType" ng-change="vm.showFn('resTypes')">
+                        <div class="item-content qw-check">
+                            {{item.name}}
+                        </div>
+                    </label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <button class="button button-clear button-assertive pull-right" on-touch="vm.clearSearchFn()">重置</button>
+    <a class="button button-clear button-positive" on-touch="vm.getSearchList()">查询</a>
+</div>

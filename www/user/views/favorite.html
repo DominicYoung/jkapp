@@ -1,0 +1,90 @@
+<ion-view>
+    <ion-side-menus enable-menu-with-back-views="false">
+        <ion-side-menu-content>
+
+            <ion-nav-bar class="bar-positive">
+                <!--返回按钮-->
+                <ion-nav-back-button ui-sref="tab.user"></ion-nav-back-button>
+
+                <ion-nav-buttons side="right">
+                    <button side="right" class="button button-icon button-clear ion-navicon" menu-toggle="right">
+                    </button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+
+            <ion-header-bar class="bar-positive">
+                <h1 class="title title-center">我的收藏</h1>
+            </ion-header-bar>
+
+            <!--菜单详情主页面-->
+            <ion-content delegate-handle="knlsScroll">
+                <ion-list show-delete="bmknlList.shouldShowDelete" can-swipe="bmknlList.listCanSwipe">
+                    <ion-item ng-repeat="knl in knlList.rows" ng-href="#/browse/{{knl.knlModule}}/{{knl.knlID}}">
+                        <h2 ng-bind="knl.title"></h2>
+                        <div class="row">
+                            <div class="col col-33 font-size-color">
+                                <span ng-bind="knl.knlModule |id2title"></span>
+                            </div>
+                            <div class="col font-size-color">
+                                收藏时间：<span ng-bind="knl.createTime | dateDay"></span>
+                            </div>
+                        </div>
+                        <ion-option-button class="button-assertive" ng-click="deleteKnl(knl.knlModule, knl.knlID)">
+                            删除
+                        </ion-option-button>
+                    </ion-item>
+                </ion-list>
+                <div class="span-ct" ng-if="!moreData.CanBeLoaded">{{moreData.loadedRemind}}</div>
+                <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="getknlList()" distance="1%">
+                </ion-infinite-scroll>
+            </ion-content>
+        </ion-side-menu-content>
+
+        <ion-side-menu side="right">
+            <ion-header-bar class="bar-dark">
+            <button class="button button-icon icon ion-ios-minus-outline"
+              on-touch="bmGroup.shouldShowDelete = !bmGroup.shouldShowDelete"></button>
+                <h1 class="title">收藏夹分组</h1>
+                <button class="button button-icon icon ion-ios-plus-outline" on-touch="addBookmakerShowFn()"></button>
+            </ion-header-bar>
+
+            <ion-content>
+                <ion-list show-delete="bmGroup.shouldShowDelete" can-swipe="bmGroup.listCanSwipe">
+                    <ion-item nav-clear menu-close ng-click="choiceBookmakerList(-1)">
+                        <span>默认收藏夹</span>
+                    </ion-item>
+                    <ion-item nav-clear menu-close ng-repeat="list in bookmakerList track by $index" ng-click="choiceBookmakerList(list.groupID)">
+                        <ion-delete-button class="ion-minus-circled" ng-click="deleteBookMaker(list.groupID)">
+                        </ion-delete-button>
+                        <span ng-bind="list.groupName"></span>
+                        <ion-option-button class="button-calm"
+                             ng-click="rename(list)">
+                            重命名
+                        </ion-option-button>
+                        <ion-option-button class="button-assertive" ng-click="deleteknlbygroup(list.groupID)">
+                            清空
+                        </ion-option-button>
+                    </ion-item>
+                </ion-list>
+            <div ng-show="addBookmakerShow">
+                <div class="item item-input-inset">
+                    <label class="item-input-wrapper">
+                    <input type="text" ng-model="crt.groupName" placeholder="请输入收藏夹名称">
+                    </label>
+                </div>
+                <button class="button button-clear button-dark pull-right" on-touch="addBookmakerShowFn()">取消</button>
+                <button class="button button-clear button-dark" on-touch="addBookmaker()">创建</button>
+            </div>
+            <div ng-show="renameShow">
+                <div class="item item-input-inset">
+                    <label class="item-input-wrapper">
+                    <input type="text" ng-model="renameObj.groupName" placeholder="请输入新的名称">
+                    </label>
+                </div>
+                <button class="button button-clear button-dark pull-right" on-touch="renameShowFn()">取消</button>
+                <button class="button button-clear button-dark" on-touch="renamePost()">重命名</button>
+            </div>
+            </ion-content>
+        </ion-side-menu>
+    </ion-side-menus>
+</ion-view>

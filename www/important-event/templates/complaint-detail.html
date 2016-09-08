@@ -1,0 +1,50 @@
+<div class="modal">
+    <ion-header-bar class="bar bar-header" style="background: rgba(250, 255, 217, 0.4)">
+        <button class="button button-clear ion-chevron-left" ng-click="goBack()"></button>
+        <h1 class="title"><span>{{detailTitle}}</span></h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="showDataSource()">统计口径</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <p class="text-detail" id="detail-description">{{description}}</p>
+        <div>
+            <div id="comPlaintDetail-chart" class="e_charts_large"></div>
+            <br/>
+            <hr style="width: 90%" />
+            <br/>
+        </div>
+        <div>
+            <div id="groupByDistribution-chart" class="e_charts"></div>
+            <br/>
+            <hr style="width: 90%" />
+            <br/>
+        </div>
+        <div>
+            <div id="groupBySource-chart" class="e_charts"></div>
+            <br/>
+            <hr style="width: 90%" />
+            <br/>
+        </div>
+        <div>
+            <div id="groupByUserAndProv-chart" class="e_charts"></div>
+            <br/>
+            <hr style="width: 90%" />
+            <br/>
+        </div>
+        <div>
+            <div id="groupByReasonProv-chart" class="e_charts"></div>
+            <br/>
+            <hr style="width: 90%" />
+            <br/>
+        </div>
+        <!--    <div>
+      <div class="detail-month">
+        <div class="full-screen"><img src="../../img/fullscreen.png" ng-click="openModal(0,0)"/></div>
+        <div id="prov-chart" ng-show='provShow' class="e_charts"></div>
+      </div>
+      <hr style="width: 90%"/>
+      <br/>
+    </div> -->
+    </ion-content>
+</div>
