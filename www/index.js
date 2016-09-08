@@ -153,7 +153,7 @@ angular.module('indexApp', ['ionic', 'ngCordova', 'checkUpdate', 'push','homeApp
         //初始化
         Push.init(notificationCallback);
         //设置别名
-        Push.setAlias("12345678");
+        Push.setAlias("123456789”);
     });
 }]);
 angular.module('indexApp').factory('userList', ['$cordovaSQLite', function($cordovaSQLite) {
